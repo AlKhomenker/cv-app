@@ -64,7 +64,6 @@ export function useLoadProgress(rail: RefObject<HTMLElement | null>): boolean {
       frame = requestAnimationFrame(tick);
     };
 
-
     frame = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(frame);
   }, [rail]);

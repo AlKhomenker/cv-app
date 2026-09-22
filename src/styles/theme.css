@@ -66,14 +66,7 @@
    * control under the hand; this is a BORDER, and a border is continuous or
    * it is a gap.
    */
-  --ring-paint: conic-gradient(
-    from 140deg,
-    var(--beam-2),
-    var(--beam-3),
-    var(--beam-1),
-    var(--beam-4),
-    var(--beam-2)
-  );
+  --ring-paint: conic-gradient(from 140deg, var(--beam-2), var(--beam-3), var(--beam-1), var(--beam-4), var(--beam-2));
 
   /**
    * The same four hues again, at the saturation a LIT EDGE needs. The tints

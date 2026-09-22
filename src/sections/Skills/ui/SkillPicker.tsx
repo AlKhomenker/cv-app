@@ -87,10 +87,7 @@ export function SkillPicker({ picker, words }: SkillPickerProps) {
                 transition-[color] duration-(--dur-fast) ease-page hover:text-ink"
               aria-label={words.clear}
               onClick={picker.clear}>
-              <Icon
-                name="close"
-                className="size-4 fill-none stroke-current [stroke-linecap:round] stroke-[1.6]"
-              />
+              <Icon name="close" className="size-4 fill-none stroke-current [stroke-linecap:round] stroke-[1.6]" />
             </button>
           </>
         )}

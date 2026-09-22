@@ -30,9 +30,7 @@ export function Loader({ onLoaded }: LoaderProps) {
       data-print="hide"
       role="progressbar"
       aria-label={content.ui.loading}>
-      <div
-        ref={railRef}
-        className="h-0.5 w-[min(220px,60vw)] overflow-hidden rounded-full bg-line">
+      <div ref={railRef} className="h-0.5 w-[min(220px,60vw)] overflow-hidden rounded-full bg-line">
         {/* `inline-size`, not a transform: it fills from the leading edge in
             both reading directions without a rule that names a side. */}
         <div

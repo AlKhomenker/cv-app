@@ -21,30 +21,27 @@ function offset(direction: Direction): string {
 export function usePageTurn() {
   const turning = useRef(false);
 
-  return useCallback(
-    (from: Direction, to: Direction, swap: () => void) => {
-      if (turning.current) return;
-      turning.current = true;
+  return useCallback((from: Direction, to: Direction, swap: () => void) => {
+    if (turning.current) return;
+    turning.current = true;
 
-      const root = document.documentElement;
-      root.style.setProperty("--flip-x", offset(from));
-      document.body.dataset.flip = "out";
+    const root = document.documentElement;
+    root.style.setProperty("--flip-x", offset(from));
+    document.body.dataset.flip = "out";
 
-      window.setTimeout(() => {
-        const y = window.scrollY;
-        root.style.setProperty("--flip-x", offset(to));
-        document.body.dataset.flip = "in";
-        swap();
+    window.setTimeout(() => {
+      const y = window.scrollY;
+      root.style.setProperty("--flip-x", offset(to));
+      document.body.dataset.flip = "in";
+      swap();
 
-        requestAnimationFrame(() =>
-          requestAnimationFrame(() => {
-            window.scrollTo({ top: y, behavior: "instant" });
-            delete document.body.dataset.flip;
-            turning.current = false;
-          })
-        );
-      }, motionMs("--dur-fast"));
-    },
-    []
-  );
+      requestAnimationFrame(() =>
+        requestAnimationFrame(() => {
+          window.scrollTo({ top: y, behavior: "instant" });
+          delete document.body.dataset.flip;
+          turning.current = false;
+        })
+      );
+    }, motionMs("--dur-fast"));
+  }, []);
 }
