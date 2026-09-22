@@ -1,11 +1,15 @@
 # Builds the page and publishes it to GitHub Pages.
 #
-# The repository is named AlKhomenker.github.io, which makes it the account's
-# USER SITE: it is served from the root, https://alkhomenker.github.io/, with
-# no project path in front of it. That is the whole reason for the name — a
-# repository called anything else would answer at /<name>/.
+# The repository is named cv-app, so this is a PROJECT SITE: it is served under
+# the repository name, at https://alkhomenker.github.io/cv-app/. Only a
+# repository named AlKhomenker.github.io answers at the root of the domain.
+#
+# The path in front makes no difference to the build: vite.config.ts sets
+# `base: "./"`, so every asset is referenced relatively and the same dist/
+# works at a root, under a path, or opened from disk.
 #
 # Before the first run, set Settings -> Pages -> Source to "GitHub Actions".
+# Without it every deploy fails with a 404 from the deployment API.
 name: Deploy to GitHub Pages
 
 on:
@@ -30,12 +34,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       # Reads the version from package.json `packageManager`.
-      - uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@v6
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: 22
           cache: pnpm
@@ -46,7 +50,7 @@ jobs:
       # see the requireCv plugin in vite.config.ts.
       - run: pnpm build
 
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: dist
 
@@ -58,4 +62,4 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5

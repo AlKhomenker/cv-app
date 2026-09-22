@@ -1,9 +1,9 @@
-# alkhomenker.github.io
+# cv-app
 
 A one-page CV: React 19, TypeScript, Vite 7, Tailwind 4. No router, no backend,
 no environment variables — the built `dist/` is a folder of static files.
 
-Live at <https://alkhomenker.github.io/>.
+Live at <https://alkhomenker.github.io/cv-app/>.
 
 ## Running it
 
@@ -30,8 +30,11 @@ saves it under.
 **GitHub Pages** happens by itself: every push to `main` runs
 [.github/workflows/deploy.yml](.github/workflows/deploy.yml), which builds and
 publishes `dist/`. It needs Settings → Pages → Source set to "GitHub Actions"
-once. The repository name is what puts the site at the root of the domain
-rather than under a path.
+once — until that is set, the build succeeds and the deploy fails with a 404.
+
+The site lands under the repository name, at `/cv-app/`. Serving it from the
+root of the domain instead is a matter of the repository name: only one called
+`AlKhomenker.github.io` answers at `https://alkhomenker.github.io/`.
 
 **Any other static host** — shared PHP hosting, S3, a plain Apache box — takes
 the same `dist/`: `vite.config.ts` sets `base: "./"`, so every asset path is
