@@ -4,38 +4,11 @@ import type { Skill } from "../utils/topics";
 
 export interface BadgeProps {
   skill: Skill;
-  /** Where it has got to as the reader scrolls — see `utils/arrival.ts`. */
   style: CSSProperties;
-  /**
-   * Whether the combobox above has this tool lit.
-   *
-   * False is a tool the reader did not ask about, not a tool that is missing:
-   * it goes grey and stays exactly where it is. Nothing is removed, because a
-   * row that reflowed as the choice changed would move the badge the reader is
-   * reading out from under them — and what a person does NOT list is part of
-   * what the list says.
-   */
   lit: boolean;
 }
 
-/**
- * One tool, as a small piece of tinted glass with a mark on it.
- *
- * It is a piece of the document and not a control. It used to be a button that
- * chose a category, which only made sense while the categories were five
- * clouds of colour with their names kept somewhere else; the names are now the
- * headings the badges sit under, so there is nothing left for a press to say.
- * A thing that looks pressable and does nothing is worse than a thing that
- * plainly is not.
- *
- * The surface is the shared `Badge` on its `topic` variant, which spends
- * `--wash` and `--line` — set by the row above, which carries the topic's id.
- * This file knows nothing about which of the five hues it is drawn in.
- *
- * The mark is the first two letters of the name and is `aria-hidden`: it says
- * nothing the name beside it does not, and two letters read out before every
- * tool would be forty-two pieces of noise.
- */
+/** One tool, as a small piece of tinted glass with a mark on it. See `../README.md`. */
 export function Badge({ skill, style, lit }: BadgeProps) {
   return (
     <Pill

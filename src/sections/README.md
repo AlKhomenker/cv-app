@@ -39,6 +39,12 @@ three ways —
 A section chooses WHEN its pieces arrive and never HOW. A reader who has learnt
 how one section arrives has learnt how all ten do.
 
+**They do not stack.** A section wraps its body in an `Emerge` and then puts a
+`LineReveal` title inside it, and two identical curves on one set of words
+multiply into a third, slower one — the heading arriving after the paragraph
+under it. `Emerge` says so through `Emerging`, and the line under it draws
+plainly and is carried by the block.
+
 ## One title
 
 `common/ui/SectionTitle` is every heading on the page, above the stage and

@@ -1,4 +1,4 @@
-import type { CSSProperties } from "react";
+import { createContext, type CSSProperties } from "react";
 
 /**
  * The page's one entrance, written once.
@@ -23,6 +23,23 @@ import type { CSSProperties } from "react";
  * constant; if it changes here it changes there, and nowhere else.
  */
 const SMALL = 0.92;
+
+/**
+ * Whether the block a line sits in is ALREADY making the entrance.
+ *
+ * Two of the three forms above can end up on the same words: a section wraps
+ * its whole body in `Emerge`, and the title inside it is a `LineReveal`. Both
+ * run 0 to 1 over `--dur-reveal` on the same easing, so the line's real
+ * opacity is the product of two identical curves — a quarter of the way in
+ * when everything around it is half — and the title reads as arriving AFTER
+ * the content it names rather than with it.
+ *
+ * So the outer one wins. `Emerge` publishes this, and a `LineReveal` under it
+ * draws its words plainly and lets the block carry them. A line with no
+ * `Emerge` over it — the opening, the closing, the bar across the top — is
+ * unaffected and still plays its own.
+ */
+export const Emerging = createContext(false);
 
 /**
  * How far one thing has arrived, 0 to 1, from the reading position.

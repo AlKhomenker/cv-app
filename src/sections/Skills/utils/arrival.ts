@@ -58,3 +58,29 @@ export function headingStyle(order: number, free: number, progress: number): CSS
   if (order < free) return emergeStyle(1);
   return emergeStyle(arrivalAt(order - free - LEAD, progress, FIRST, APART, SPAN));
 }
+
+/**
+ * How far through the section the rows have finished panning.
+ *
+ * Just past the last badge's own arrival. The pan exists to reach rows a short
+ * screen cannot show at once, so it must not carry a row up to the reading
+ * area before the badges in it have appeared — and it must be over by the time
+ * the section stops changing, or the reader is left scrolling a finished
+ * picture.
+ */
+const PAN_END = 0.62;
+
+/**
+ * How much of the hidden rows the reader has pulled into view, 0 to 1.
+ *
+ * The section is sized to a pinned screen and a phone held upright is not one:
+ * five rows of badges are about a hundred and fifty pixels taller than a
+ * 667-pixel screen has room for, and with the stage holding the scroll those
+ * last badges were not merely below the fold, they were unreachable. So the
+ * rows travel under the title as the reader moves through the section — the
+ * same gesture, the same reading position, and on a screen with room for all
+ * five nothing moves at all, because there is nothing hidden to move.
+ */
+export function panAt(progress: number): number {
+  return Math.min(Math.max(progress / PAN_END, 0), 1);
+}

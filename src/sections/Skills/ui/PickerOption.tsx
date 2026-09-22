@@ -4,27 +4,12 @@ import type { PickerOption as Option } from "../utils/picker";
 export interface PickerOptionProps {
   option: Option;
   id: string;
-  /** Whether this tool is one of the lit ones. */
   chosen: boolean;
-  /** Whether the keyboard is standing on this row. */
   cursor: boolean;
   onChoose: (option: Option) => void;
 }
 
-/**
- * One tool in the open list: its monogram, its name, and a tick once it is on.
- *
- * It is a `button` inside a `role="option"` nowhere — it IS the option, and
- * carries the role itself, so a screen reader is told the one thing that is
- * true of it: selected, or not. The keyboard never lands on it either; the
- * field keeps the focus and points at this row through `aria-activedescendant`,
- * which is what the combobox pattern asks for and what stops `Tab` walking
- * through forty-two stops on the way out of the section.
- *
- * The hue is the row's own, inherited from the `data-topic` the group above
- * sets — the same colour this tool's badge is drawn in below, which is what
- * ties the list to the rows behind it without a word being written.
- */
+/** One tool in the open list: its monogram, its name, and a tick once it is on. */
 export function PickerOption({ option, id, chosen, cursor, onChoose }: PickerOptionProps) {
   return (
     <div

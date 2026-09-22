@@ -84,6 +84,25 @@ No row in it is focusable. Forty-two tab stops between the field and the rest
 of the page is a keyboard reader trapped in a filter, and the pattern above
 already gives them every row without one.
 
+### The field, the count and the chevron
+
+- **The box is the control, so the box shows the focus.** The `input` inside
+  draws nothing — a ring on it would sit inside the border and read as a second
+  one — and the wrapper asks for `focus-ring` on `focus-within`. See
+  `focus-ring` in `styles/tailwind.css`.
+- **A press opens the list; the focus does not.** Focus comes back to the field
+  after every choice and after the chevron, and a list that reopened on focus
+  would be one the chevron could never shut. A keyboard opens it with the
+  arrows instead.
+- **The count is a `role="status"`.** The choice is made in a list that is
+  covering the badges it changes, so the number is the only thing that can
+  report what just happened — as a number to look at, and as a sentence to be
+  read out.
+- **The chevron is decoration with a hit area.** `tabIndex={-1}` and
+  `aria-hidden`: it only saves a reader who has not guessed that pressing the
+  field opens the list, and it is out of the tab order for that reason rather
+  than hidden — a pointer still needs somewhere to press.
+
 ### It has to keep its own wheel
 
 `shell/Stage/hooks/useStage.ts` listens on the WINDOW and spends every wheel
@@ -167,20 +186,59 @@ painted in its hue at full strength either: `--wash` tints the surface and
 `aria-hidden` — it says nothing the name beside it does not, and two letters
 read out before every tool would be forty-two pieces of noise.
 
-## It has to fit
+## When it does not fit, the rows travel
 
-The section is pinned, and under normal motion the stage keeps every wheel,
-touch and arrow key for itself — so a pane inside it that scrolls is a pane
-nobody can drive. Five rows and forty-two badges therefore have to fit the
-screen they are on, which is what every size in here is about: the type, the
-gaps, the badge padding and the monogram are all `clamp(…, min(Xvw, Yvh), …)`,
-so they answer a narrow screen and a short one at the same time.
+Every size in here is written to fit a pinned screen — the type, the gaps, the
+badge padding and the monogram are all `clamp(…, min(Xvw, Yvh), …)`, so they
+answer a narrow screen and a short one at the same time. On a phone held
+upright that is still not enough: at 375×667 the five rows come to 623px in
+482px of room, and the last topic was **140px below the bottom edge with no
+way to reach it**, because the stage keeps every wheel and every finger for
+itself and a pane inside it that scrolls is a pane nobody can drive.
 
-Under **reduced motion** the opposite is true. The stage gives such a section
-no scroll of its own, every badge is in place from the first frame, and the
-rows become an ordinary column that scrolls itself — `motion-reduce:block`,
-`motion-reduce:overflow-y-auto`, and a tab stop so a keyboard can reach it.
-`utils/scrollers.ts` is what lets that column take the gesture back.
+So the rows pan. The layout is three flex items in a column:
+
+- the **title** and the **field** keep their height — `shrink-0` on both, or
+  the flex box would take the overflow out of the heading's line;
+- the **rows** sit in a box with `min-h-0` and `overflow-hidden`, which is what
+  lets that box shrink to the space left. Without `min-h-0` a flex item refuses
+  to go below its content, which is exactly how the overflow ended up at the
+  foot of the section in the first place;
+- inside that box the rows are one block carrying a `translate`, pulled up by
+  `hidden × panAt(progress)` — see below.
+
+`justify-center-safe` on the column is what makes both cases one layout: the
+three blocks are centred on a screen with room for them, and packed from the
+top on one without, rather than hung half off it.
+
+### How much, and when
+
+`hooks/useRowsFit.ts` measures rather than declaring: `offsetHeight` of the
+rows against `clientHeight` of the box, under a `ResizeObserver` on both. A
+breakpoint would answer for the window and be wrong about the other two things
+that decide this — the length of the words in whichever language is on, and
+how many tools the CV lists — and wrong in the direction that hides content.
+
+It reads `offsetHeight`, **not** `getBoundingClientRect`. The section is drawn
+inside a `common/ui/Emerge`, which is a scale, and a rect under a scale reports
+the drawn size rather than the laid-out one: 8% small for most of the entrance,
+and a different number on every frame of it.
+
+`panAt` in `utils/arrival.ts` ramps the travel to 1 by progress `0.62`, just
+past the last badge's own arrival. Earlier and a row would be carried up before
+the badges in it had appeared; later and the reader would be scrolling a
+finished picture to reach the end of it. On a screen with room for all five
+rows, `hidden` is 0 and nothing moves at all.
+
+## Under reduced motion, none of that happens
+
+The stage gives such a section no scroll of its own, every badge is in place
+from the first frame, and the rows become an ordinary column that scrolls
+itself — `motion-reduce:block`, `motion-reduce:overflow-y-auto`, and a tab stop
+so a keyboard can reach it. The pan is held at 0 and the box stops clipping
+(`motion-reduce:overflow-visible`), because a real scroller and a pan would be
+two answers to one gesture. `utils/scrollers.ts` is what lets that column take
+the gesture back.
 
 ## Direction
 

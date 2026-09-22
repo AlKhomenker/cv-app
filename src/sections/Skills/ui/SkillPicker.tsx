@@ -8,40 +8,19 @@ import { PickerOption } from "./PickerOption";
 export interface SkillPickerProps {
   picker: Picker;
   words: SkillFilterWords;
+  className?: string;
 }
 
-/**
- * The one control in section 4: a combobox naming the tools, any number of
- * them at once.
- *
- * What it does is the whole of its design. Choosing nothing is not an empty
- * state — it is the section as it always was, every badge lit — and choosing
- * something lights exactly those and takes every other badge down to grey. The
- * rows never reflow while that happens: a reader looking for four tools also
- * learns which forty-two were on the list, and a list that rearranges itself
- * under the eye is a list nobody can read.
- *
- * It is a field with a list under it rather than a row of five topic buttons,
- * because the question a reader brings to this section is "do they know X",
- * where X is a name they already have in their head. Typing three letters of
- * it is the shortest way from the question to the answer.
- *
- * The keyboard is the combobox pattern: focus stays in the field, the arrows
- * move a cursor through the open list, `Enter` lights what the cursor is on,
- * and `Escape` shuts the list and then empties the field. Nothing in the list
- * is a tab stop, so `Tab` leaves the section rather than walking through
- * forty-two rows on the way out.
- */
-export function SkillPicker({ picker, words }: SkillPickerProps) {
+/** The one control in section 4: a combobox naming any number of the tools. See `../README.md`. */
+export function SkillPicker({ picker, words, className }: SkillPickerProps) {
   const listId = useId();
   const cursorId = picker.cursor < 0 ? undefined : `${listId}-${picker.cursor}`;
 
   return (
-    <div ref={picker.root} className="relative mx-auto mt-[clamp(6px,1.6vh,14px)] w-full max-w-95">
+    <div
+      ref={picker.root}
+      className={["relative mx-auto mt-[clamp(6px,1.6vh,14px)] w-full max-w-95", className].filter(Boolean).join(" ")}>
       <div
-        /* The BOX is the field, so the box shows the focus: the input inside
-           it draws nothing, or the ring would sit inside the border and read
-           as a second one. See `focus-ring` in `styles/tailwind.css`. */
         className="flex items-center gap-1.5 rounded-field border border-hair bg-glass-strong
           px-2.5 py-1 backdrop-blur-(--glass-blur) backdrop-saturate-(--glass-sat)
           transition-[border-color] duration-(--dur-fast) ease-page
@@ -61,20 +40,12 @@ export function SkillPicker({ picker, words }: SkillPickerProps) {
             placeholder:text-faint focus:outline-none
             md:text-[0.86rem]"
           onChange={(event) => picker.type(event.target.value)}
-          /* A press on the field opens the list; the FOCUS does not. Focus
-             comes back to the field after every choice and after the chevron,
-             and a list that reopened on it would be one the chevron could
-             never shut. A keyboard opens it with the arrows instead. */
           onClick={picker.show}
           onKeyDown={picker.onKeyDown}
         />
 
         {picker.count > 0 && (
           <>
-            {/* How many are lit, as a number to look at and a sentence to be
-                read out. `status` rather than a silent span: the choice is
-                made in a list that is covering the badges it changes, so the
-                count is the only thing that can report what just happened. */}
             <span
               role="status"
               aria-label={chosenLabel(words.chosen, picker.count)}
@@ -92,10 +63,6 @@ export function SkillPicker({ picker, words }: SkillPickerProps) {
           </>
         )}
 
-        {/* Decoration with a hit area: the field is the control, and this only
-            saves a reader who has not guessed that clicking it opens the list.
-            It is out of the tab order for that reason, not hidden — a pointer
-            still needs somewhere to press. */}
         <button
           type="button"
           tabIndex={-1}
@@ -111,9 +78,6 @@ export function SkillPicker({ picker, words }: SkillPickerProps) {
         </button>
       </div>
 
-      {/* The list is absolute so that opening it moves nothing: the rows below
-          are sized to fit a pinned screen, and a panel that pushed them down
-          would take the last of them off the bottom of it. */}
       {picker.open && (
         <div
           ref={picker.list}

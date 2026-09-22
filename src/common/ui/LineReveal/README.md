@@ -12,6 +12,25 @@ scale about the centre and nothing else.
 `shown` drives both directions. There is **no delay and no stagger**: every
 line on a section arrives together.
 
+## Inside an `Emerge` it does nothing
+
+`common/ui/Emerge` runs the same curve over the same duration on a whole
+block, and a section wraps its body in one and then puts a `LineReveal` title
+inside it. Both played, so the line's real opacity was the PRODUCT of two
+identical curves — 9% where the badges around it were 31%, 54% where they were
+73%. The heading read as arriving after the content it names.
+
+The outer one wins. `Emerge` publishes `Emerging` from
+`common/utils/emerge.ts`, and a `LineReveal` under it draws its words plainly
+and lets the block carry them. A line with no `Emerge` over it — the opening,
+the summary, the closing, the bar across the top — is untouched and still
+plays its own.
+
+It is a context and not a prop because the two are rarely adjacent: the
+section wraps its body, and `common/ui/SectionTitle` reaches for a
+`LineReveal` several files away without either of them knowing about the
+other.
+
 ## Why there is no stagger
 
 Three attempts, each failing differently, and the browser settled it:
