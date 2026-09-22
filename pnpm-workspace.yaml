@@ -1,0 +1,7 @@
+# Not a workspace — this is where pnpm 10 keeps its settings now, after it
+# stopped reading the "pnpm" field in package.json.
+#
+# pnpm blocks install scripts by default. esbuild's picks the binary for the
+# platform, and vite's build needs it, so this one is allowed through.
+onlyBuiltDependencies:
+  - esbuild
