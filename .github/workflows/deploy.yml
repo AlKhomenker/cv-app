@@ -1,0 +1,61 @@
+# Builds the page and publishes it to GitHub Pages.
+#
+# The repository is named AlKhomenker.github.io, which makes it the account's
+# USER SITE: it is served from the root, https://alkhomenker.github.io/, with
+# no project path in front of it. That is the whole reason for the name — a
+# repository called anything else would answer at /<name>/.
+#
+# Before the first run, set Settings -> Pages -> Source to "GitHub Actions".
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Writing a Pages deployment and minting the OIDC token it is claimed with;
+# everything else stays read-only.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One deploy at a time, and never cancel one in flight: a cancelled deploy can
+# leave the site on a half-published version.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Reads the version from package.json `packageManager`.
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      # `tsc --noEmit && vite build`. It fails if public/cv/*.pdf is missing —
+      # see the requireCv plugin in vite.config.ts.
+      - run: pnpm build
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

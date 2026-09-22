@@ -1,0 +1,42 @@
+/**
+ * The measurements: how long things take, what they are set in, and how wide
+ * the page is. Every one is named by a Tailwind utility through the `@theme`
+ * block in `tailwind.css`, and read directly by the hand-written CSS that a
+ * utility cannot express.
+ *
+ * COLOUR IS NOT HERE. It is in `theme.css`, with the glass recipe and the four
+ * hues the background is painted from — one palette for the whole page, light
+ * and dark. This file used to carry a second one, for the sections that had
+ * not been redrawn yet; there are none left.
+ *
+ * `color-mix()` is absent from both files. It was ruled out by html2canvas,
+ * which threw on it while the page drew its own PDF; the download now hands
+ * over a real file and that constraint is gone, so the two palettes stay as
+ * they are by choice and not by force.
+ */
+:root {
+  /* The motion contract. Nothing moves on a duration or a curve not listed. */
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --dur-fast: 140ms;
+  --dur: 220ms;
+  --dur-slow: 340ms;
+
+  --serif: "Frank Ruhl Libre", Georgia, "Times New Roman", serif;
+  /**
+   * The academic face, for section 5 and nowhere else.
+   *
+   * It is a register and not a decoration: a page about a degree and a set of
+   * prizes is a different kind of document from a page about shipping
+   * software, and the reader is told so before reading a word. It is lighter
+   * and set larger than the other two, which is why it is a third token rather
+   * than a weight of `--serif`.
+   */
+  --academic: "Cormorant Garamond", Garamond, Georgia, "Times New Roman", serif;
+  --sans: "Assistant", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+
+  --gutter: 16px;
+  --maxw: 68rem;
+
+  /* Which way the page turns when the language changes. Set by usePageTurn. */
+  --flip-x: -8px;
+}

@@ -1,0 +1,54 @@
+# Apache settings for the built page on a shared PHP host (InfinityFree and
+# the like). Vite copies everything in `public/` into `dist/`, this file
+# included, so it is uploaded with the rest and needs no separate step.
+# GitHub Pages does not run Apache and ignores it.
+#
+# There is deliberately NO SPA rewrite here. The page has one route and no
+# router, and a catch-all rewrite to index.html is what turns a missing
+# `cv/Alina-Khomenker-CV.pdf` into an HTML page saved under a `.pdf` name —
+# the failure vite.config.ts guards the build against. A 404 must stay a 404.
+
+# UTF-8 for the text served here, so Hebrew and the typographic dashes are
+# not decoded as Latin-1 by a host whose default is.
+AddDefaultCharset utf-8
+AddType "text/html; charset=utf-8" .html
+AddType "text/css; charset=utf-8" .css
+AddType "application/javascript; charset=utf-8" .js
+
+# Types a stock shared host may not know. Without the first one the browser
+# downloads the fonts instead of using them; without the last, a PDF opens as
+# a text dump.
+AddType font/woff2 .woff2
+AddType image/svg+xml .svg
+AddType image/webp .webp
+AddType application/pdf .pdf
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript image/svg+xml application/json
+</IfModule>
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  # The bundles carry a content hash in their name, so a new build is a new
+  # URL and a year of caching can never serve a stale one.
+  <FilesMatch "\.(js|css|woff2|png|jpe?g|webp|svg)$">
+    ExpiresDefault "access plus 1 year"
+  </FilesMatch>
+  # index.html is the one file whose URL never changes; it has to be
+  # re-fetched or the reader keeps loading the previous build's bundles.
+  <FilesMatch "\.html$">
+    ExpiresDefault "access plus 0 seconds"
+    <IfModule mod_headers.c>
+      Header set Cache-Control "no-cache, must-revalidate"
+    </IfModule>
+  </FilesMatch>
+  # The CV is replaced in place under the same name, so it must not stick
+  # either.
+  <FilesMatch "\.pdf$">
+    ExpiresDefault "access plus 1 hour"
+  </FilesMatch>
+</IfModule>
+
+# No browsable directory index for public/cv and friends.
+Options -Indexes
+DirectoryIndex index.html

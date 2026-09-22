@@ -1,0 +1,147 @@
+/**
+ * The layer every component sits on: the reset, the typography, the language
+ * turn, and print.
+ *
+ * It holds no component classes any more. Everything a section is drawn with
+ * is a Tailwind utility on the element itself, or one of the three recipes in
+ * `common/utils/surfaces.ts` — the page has one styling mechanism now.
+ *
+ * Print still needs one selector here, and it names a DATA ATTRIBUTE rather
+ * than a class: a utility class cannot be reached from a stylesheet written by
+ * hand, and what this rule has to do is override one. `data-mark` is written
+ * by `Stars` for exactly this purpose, because a sheet of paper is drawn from
+ * the whole document and most of its ratings were never counted in.
+ *
+ * Two others went the same way as the code that wrote them. `data-reveal` was
+ * the scrolling document below the stage, marking a block an
+ * `IntersectionObserver` had not reached; `data-open` was `common/ui/Collapse`,
+ * forcing a closed answer open on paper. The questions are a Radix accordion
+ * now and mark themselves with `data-state`, which print cannot force open the
+ * same way — so a printed PAGE shows only the answer that was open. The CV
+ * itself is a file and is unaffected; see below.
+ *
+ * This is the PAGE on paper, and not the CV: the download hands over a real
+ * file — see `features/pdf` — so nothing here is drawing that.
+ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+img {
+  max-inline-size: 100%;
+  display: block;
+}
+
+/*
+ * What a link and a button are set in, as a DEFAULT rather than as a law.
+ *
+ * `@layer base`, for the same reason the focus ring in `theme.css` is in one:
+ * this file is imported unlayered, and unlayered CSS beats everything in a
+ * layer however specific — so while these two sat outside a layer, `a` and
+ * `button` won against every `text-*` utility written on a link or a button in
+ * the app. The company name in section 3 is what made it visible: blue on a
+ * card, where it is a `span`, and inherited grey the moment the role opened
+ * and the same name became an `a`.
+ *
+ * In `base` they behave the way a default should: a link and a button take the
+ * colour of the text around them until something asks for another one.
+ */
+@layer base {
+  a {
+    color: inherit;
+  }
+
+  button {
+    font: inherit;
+    color: inherit;
+  }
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--serif);
+  font-weight: 700;
+  line-height: 1.15;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* The language turn. It is worn by exactly one element — the stage, which is
+   the whole page — and `shell/Stage/Stage.tsx` says why that is safe although
+   the stage is fixed. It used to be worn by the scrolling document below the
+   stage, back when there was one. */
+.flip {
+  transition:
+    opacity var(--dur) var(--ease),
+    transform var(--dur) var(--ease);
+}
+
+body[data-flip="out"] .flip {
+  opacity: 0;
+  transform: translateX(var(--flip-x));
+  transition-duration: var(--dur-fast);
+}
+
+body[data-flip="in"] .flip {
+  opacity: 0;
+  transform: translateX(var(--flip-x)) scale(0.99);
+  transition-duration: 0s;
+}
+
+/* Print. The CV itself is a file; this is the page put on paper. */
+@page {
+  size: A4;
+  margin: 12mm;
+}
+
+@media print {
+  [data-print="hide"] {
+    display: none !important;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+  }
+
+  [data-mark] {
+    opacity: 1 !important;
+    scale: none !important;
+  }
+
+  [data-print="avoid-break"] {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  section {
+    padding-block: 14px;
+    border-block-start: 1px solid #ccc;
+  }
+}

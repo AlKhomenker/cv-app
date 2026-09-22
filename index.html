@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Alina Khomenker — Senior Full-Stack Engineer</title>
+    <meta
+      name="description"
+      content="Senior full-stack engineer, 6+ years, frontend oriented. React, TypeScript, .NET. Hadera, Israel."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Frank+Ruhl+Libre:wght@500;700&display=swap"
+    />
+    <!-- The initials on the page's own accent: #2f7fe0 is `--beam-3`, which
+         `--page-accent` is, and the letters are `--page` in the light theme.
+         Both are written out because a data URI cannot read a custom property;
+         they are the two colours in `styles/theme.css` and have to follow it.
+
+         The accent rather than the four tints the background is painted with:
+         those are pastels, and a pastel tile at 16px on a pale browser tab is
+         a tile nobody can see. It stays the same in both themes, because a
+         favicon is not asked which one the page is wearing. -->
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%232f7fe0'/><text x='16' y='22' font-family='Georgia,serif' font-size='16' fill='%23ffffff' text-anchor='middle'>AK</text></svg>"
+    />
+  </head>
+  <body>
+    <!-- The theme and the language, before the first paint. Light and English
+         are the defaults, written into the markup above; a stored choice wins.
+         Without this the page would flash the wrong theme while the bundle
+         loads, and would lay its first frame out left to right for a reader
+         who left it in Hebrew.
+
+         Both keys, both lists and the direction of each language are written
+         out here in plain script because this runs before anything is loaded —
+         it cannot import `themeStorage.ts` or `content/index.ts`, which are
+         where the same facts live for the rest of the page. They have to stay
+         in step. -->
+    <script>
+      (function () {
+        var root = document.documentElement;
+        var theme = 'light';
+        try {
+          var stored = localStorage.getItem('cv-theme');
+          if (stored === 'light' || stored === 'dark') theme = stored;
+        } catch (error) {
+          /* storage is off; the default stands */
+        }
+        root.dataset.theme = theme;
+
+        try {
+          var locale = localStorage.getItem('cv-locale');
+          if (locale === 'en' || locale === 'he') {
+            root.lang = locale;
+            root.dir = locale === 'he' ? 'rtl' : 'ltr';
+          }
+        } catch (error) {
+          /* storage is off; the markup's own lang and dir stand */
+        }
+      })();
+    </script>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

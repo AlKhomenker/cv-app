@@ -1,0 +1,462 @@
+/**
+ * The page's colour, all of it: the palette, the glass recipe, the four hues
+ * the background is painted from and the two gradients built out of them,
+ * plus the hidden scrollbar and the stage lock. `tokens.css` beside it holds
+ * what is not a colour — the durations, the typefaces, the measurements.
+ *
+ * Light is the default here, not the system preference. `index.html` writes
+ * `data-theme` before the first paint, so neither theme flashes on load.
+ */
+:root,
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  --page: #ffffff;
+  --page-ink: #191d24;
+  --page-soft: #5c6675;
+  --page-faint: #8c95a3;
+  --page-line: rgb(25 29 36 / 0.1);
+
+  /* Glass: translucent fill, a dark hairline at low alpha, a light top edge. */
+  --glass-fill: rgb(255 255 255 / 0.55);
+  --glass-fill-strong: rgb(255 255 255 / 0.72);
+  --glass-hair: rgb(25 29 36 / 0.12);
+  --glass-edge: rgb(255 255 255 / 0.9);
+  --glass-blur: 20px;
+  --glass-sat: 1.5;
+  --glass-drop: 0 12px 34px rgb(25 29 36 / 0.08);
+
+  --focus: #4c62a8;
+
+  /**
+   * The four hues the background is made of, as interface colours: pale rose,
+   * mint, periwinkle, sand. They are what the border beam is drawn from, so a
+   * control lit up is lit by the page's own light.
+   *
+   * The canvas keeps its own copy, as numbers, in `BlobField/utils/palette.ts`
+   * — it interpolates between them per frame and cannot do that from a string.
+   * The two are the same four colours and change together.
+   */
+  --tint-1: #f9d6e0;
+  --tint-2: #d1f0e2;
+  --tint-3: #d6ddf9;
+  --tint-4: #f6ead3;
+
+  /**
+   * The travelling ring, as one value. It lives here because it is made of
+   * the four colours above; `--beam-angle` inside it is resolved on whatever
+   * element finally paints it, which is what lets one animation on a button
+   * drive both its ring and its bloom.
+   */
+  --beam-paint: conic-gradient(
+    from var(--beam-angle),
+    transparent 0deg,
+    var(--beam-2) 22deg,
+    var(--beam-3) 74deg,
+    var(--beam-1) 124deg,
+    var(--beam-4) 168deg,
+    transparent 208deg,
+    transparent 360deg
+  );
+
+  /**
+   * The same four colours as a border that does NOT move: a full turn with no
+   * transparent arc in it, closing on the hue it opened with so the seam
+   * cannot be found. `--beam-paint` is a BEAM — a lit arc travelling round a
+   * control under the hand; this is a BORDER, and a border is continuous or
+   * it is a gap.
+   */
+  --ring-paint: conic-gradient(
+    from 140deg,
+    var(--beam-2),
+    var(--beam-3),
+    var(--beam-1),
+    var(--beam-4),
+    var(--beam-2)
+  );
+
+  /**
+   * The same four hues again, at the saturation a LIT EDGE needs. The tints
+   * above are background light and disappear the moment they are asked to be
+   * a line; these are that light turned up — except the third, which is a
+   * BLUE rather than the tint's periwinkle: as a line, periwinkle reads
+   * purple, and the border is not meant to turn purple on its way round.
+   */
+  --beam-1: #e04f92;
+  --beam-2: #14a684;
+  --beam-3: #2f7fe0;
+  --beam-4: #d1912a;
+  --beam-bloom: 9px;
+
+  /**
+   * The accent is the beam's blue ITSELF, not a copy of it: one hue answers
+   * for the lit edge, the summary's number and every link and pressed tag
+   * below the stage, and it changes in one place.
+   *
+   * There is no soft fill beside it. A tinted block would be a fourth alpha
+   * over glass that is already translucent; a thing that wants to read as
+   * accented takes the accent's LINE and its text and sits on the glass the
+   * rest of the page sits on.
+   */
+  /**
+   * The five topics of section 4, one hue each, so the five rows of badges
+   * read as five groups before a single heading is read.
+   *
+   * Four of them ARE the page's own four hues — the lit-edge family above,
+   * which was chosen to stay legible over the pastels the canvas paints, which
+   * is exactly the job here. The fifth is a violet, because the background has
+   * no violet in it and a fifth topic must not be a second reading of one of
+   * the four.
+   *
+   * A badge is not painted in its hue at full strength. `--wash` is what the
+   * surface is tinted with and `--line` what its edge is drawn in, both mixed
+   * down from the one hue below, so there is one number per topic and not
+   * fifteen.
+   */
+  /**
+   * Section 5 is set on PAPER rather than on glass: a warm near-white with a
+   * fine line round it and almost no blur behind it.
+   *
+   * It is the same decision as the typeface there. A page about a degree and a
+   * set of prizes is a different kind of document from the rest of the site,
+   * and the surface says so before a word is read. Almost opaque on purpose —
+   * glass you can read the light through is what every other section is made
+   * of, and a paper that let the light through would just be thinner glass.
+   */
+  --paper-fill: rgb(251 248 242 / 0.94);
+  --paper-line: rgb(74 60 42 / 0.16);
+  --paper-blur: 3px;
+  --paper-drop: 0 10px 30px rgb(74 60 42 / 0.08);
+
+  /**
+   * The fifth hue a card's picture is painted with, after the page's own four
+   * tints: a lilac the background has none of.
+   *
+   * It is the last of what was a set of four — the iridescence inside the
+   * glass medal a prize used to carry. The medal went when a school's card and
+   * a prize's card became the same card; this survived it, because five blots
+   * of four hues is one hue repeated and a reader can see that.
+   */
+  --iris-3: #e0d3f7;
+
+  --topic-1: var(--beam-3);
+  --topic-2: var(--beam-2);
+  --topic-3: #7a5cd6;
+  --topic-4: var(--beam-4);
+  --topic-5: var(--beam-1);
+
+  --page-accent: var(--beam-3);
+  --page-high: var(--beam-4);
+  --page-warn: #c0402c;
+
+  /* What the fixed header takes off the top of a pinned section. */
+  --header-h: 60px;
+
+  /**
+   * Two of the tokens below are also READ FROM JAVASCRIPT, through
+   * `common/utils/motionTokens.ts`. Write them in milliseconds, as the rest
+   * are; the production minifier will rewrite `520ms` as `.52s` on its way
+   * out, and that reader knows to expect either.
+   */
+
+  /**
+   * How long one thing takes to grow into place out of its own centre.
+   * Deliberately outside the 140/220/340 contract above: those are for a
+   * control answering a press, and this is the page introducing itself.
+   *
+   * ONE duration for the whole page. Every section makes the same entrance —
+   * see `common/utils/emerge.ts` — so a reader who has learnt how one arrives
+   * has learnt how all nine do, and the pace is set here rather than nine
+   * times over.
+   */
+  --dur-reveal: 720ms;
+
+  /**
+   * The beat between the loader starting to leave and the page making its
+   * entrance. Long enough that the two are read as one after the other rather
+   * than as one over the top of the other.
+   */
+  --reveal-start: 380ms;
+
+  /**
+   * How long a stage section takes to empty itself: one `--dur-reveal`, since
+   * every line leaves together. It is a DELAY, not a duration — nothing
+   * moves for this long, the stage just waits before covering what is still
+   * writing itself out.
+   */
+  --reveal-out: 780ms;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --page: #06070a;
+  --page-ink: #eef1f6;
+  --page-soft: #9aa4b4;
+  --page-faint: #6f7987;
+  --page-line: rgb(255 255 255 / 0.12);
+
+  --glass-fill: rgb(255 255 255 / 0.05);
+  --glass-fill-strong: rgb(255 255 255 / 0.08);
+  --glass-hair: rgb(255 255 255 / 0.13);
+  --glass-edge: rgb(255 255 255 / 0.16);
+  --glass-blur: 22px;
+  --glass-sat: 1.35;
+  --glass-drop: 0 14px 40px rgb(0 0 0 / 0.5);
+
+  --focus: #9db3ee;
+
+  --tint-1: #e087a6;
+  --tint-2: #5fcfae;
+  --tint-3: #8b9bf0;
+  --tint-4: #e0bd7a;
+
+  --beam-1: #ff69b4;
+  --beam-2: #3df0c4;
+  --beam-3: #5aa8ff;
+  --beam-4: #ffc46b;
+  --beam-bloom: 13px;
+
+  /* Paper in the dark is a very dark warm grey, not a grey with a cast. */
+  --paper-fill: rgb(26 23 19 / 0.93);
+  --paper-line: rgb(255 244 228 / 0.14);
+  --paper-blur: 3px;
+  --paper-drop: 0 14px 40px rgb(0 0 0 / 0.55);
+
+  /* The same lilac, deeper, because it is being read against black. */
+  --iris-3: #a37ae6;
+
+  --topic-3: #a98cff;
+
+  --page-warn: #ff9179;
+}
+
+/* The page itself. `base.css` still paints the old paper; this wins because
+   the redesign's layer is imported last. */
+body {
+  background: var(--page);
+  color: var(--page-ink);
+}
+
+/*
+ * The focus ring, as a DEFAULT rather than as a law.
+ *
+ * It is in `@layer base` on purpose, and that one word is the whole of this
+ * comment. `styles/theme.css` is imported unlayered, and unlayered CSS beats
+ * everything in a layer however specific — so while this rule sat outside a
+ * layer it won against every `outline-none` utility in the app. Five controls
+ * asked to draw their own focus and none of them got it; the picker in section
+ * 4 ended up with two rings, its own inside the box around it, which is what
+ * made the bug visible.
+ *
+ * In `base` it behaves the way a default should: anything focused gets a ring,
+ * and a control that draws focus somewhere better turns this off with
+ * `outline-none` and puts `focus-ring` where it belongs. The radius is here so
+ * the ring has corners on an element with no radius of its own; an element
+ * with one now keeps it, which it did not before either.
+ */
+@layer base {
+  :focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+}
+
+@media (min-width: 768px) {
+  :root {
+    --header-h: 76px;
+  }
+}
+
+/**
+ * The angle the border beam is drawn from. It has to be REGISTERED, or a
+ * browser treats it as a string and jumps from 0 to 360 in one frame instead
+ * of travelling.
+ */
+@property --beam-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  /* Inherited on purpose: the button runs ONE animation and both the ring and
+     the bloom under it read the same angle, so they can never drift apart. */
+  inherits: true;
+}
+
+/* The scrollbar is never drawn — not on the page, not in any pane. */
+html {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+/**
+ * No bounce, in either direction, ever.
+ *
+ * The page ENDS on the closing section and stays there — see `stop` in
+ * `shell/Stage/types.ts`. A gesture made past the end has to move nothing, and
+ * a rubber-band that pulled the whole page down an inch and let it go would
+ * read as a page that tried to continue and failed rather than as one that had
+ * finished. The stage's own lock below says the same thing while it holds the
+ * scroll; this says it whether it is locked or not.
+ */
+html,
+body {
+  overscroll-behavior-y: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+*::-webkit-scrollbar {
+  display: none;
+  inline-size: 0;
+  block-size: 0;
+}
+
+/* The theme cross-fade. Held back until the provider has mounted so the value
+   written by the inline script is never animated into place. */
+:root[data-theme-ready="true"] body,
+:root[data-theme-ready="true"] .glass {
+  transition:
+    background-color var(--dur) var(--ease),
+    border-color var(--dur) var(--ease),
+    box-shadow var(--dur) var(--ease),
+    color var(--dur) var(--ease);
+}
+
+/* While the stage owns the scroll the document itself cannot move, which is
+   what makes the page look motionless with only its content changing. */
+:root[data-stage="locked"],
+:root[data-stage="locked"] body {
+  overflow: hidden;
+  block-size: 100%;
+  overscroll-behavior: none;
+}
+
+/**
+ * While one role fills the screen the light behind it stands further back: a
+ * little more blur and a little less of it.
+ *
+ * The section on the stage asks for quiet through `calm`, which is about the
+ * canvas's own movement. This is the other thing — the text is no longer on
+ * one card in the middle of the screen, it is over the whole of it, and light
+ * that was behind a paragraph is now behind every line. It is written here,
+ * next to the field itself, because what it changes is the page.
+ */
+:root[data-panel="open"] [data-field] {
+  --field-more: 26px;
+  opacity: 0.8;
+}
+
+/**
+ * And the bar goes. A role that fills the screen carries its own close
+ * control in the same corner the bar keeps its toggles in, and two controls in
+ * one corner is a reader pressing the wrong one. It is also the only thing on
+ * the page drawn above the stage, so leaving it would be a header floating
+ * over a full-screen panel.
+ *
+ * Focus does not follow it out of sight — the panel holds focus while it is
+ * open, which is the half of this that a stylesheet cannot do. The fade's own
+ * duration is on the bar, in `Header.tsx`: this says WHEN it goes, and the bar
+ * says how it moves.
+ */
+:root[data-panel="open"] header {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/**
+ * One sheet of paper: a warm near-opaque fill, a fine line, and only enough
+ * blur behind it to keep the edge from looking cut out. The counterpart of
+ * `.glass`, and the whole of section 5's register change that is not a
+ * typeface.
+ */
+.paper {
+  background: var(--paper-fill);
+  backdrop-filter: blur(var(--paper-blur));
+  -webkit-backdrop-filter: blur(var(--paper-blur));
+  border: 1px solid var(--paper-line);
+  box-shadow: var(--paper-drop);
+}
+
+/**
+ * One glass surface: translucent fill, blur with a touch of saturation, a
+ * hairline border and a light inner edge along the top.
+ */
+.glass {
+  background: var(--glass-fill);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-sat));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-sat));
+  border: 1px solid var(--glass-hair);
+  box-shadow:
+    inset 0 1px 0 var(--glass-edge),
+    var(--glass-drop);
+}
+
+/* A Safari without backdrop-filter gets an opaque-enough fill instead of a
+   pane you can read the text behind. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass {
+    background: var(--glass-fill-strong);
+  }
+}
+
+/**
+ * A topic's hue, and the two strengths a badge actually draws in: `--wash` for
+ * the surface and `--line` for the edge.
+ *
+ * The mapping is here rather than in the component because it is COLOUR, and
+ * because the component has no business knowing that the third topic is the
+ * violet one: the row carries the id the content gave it and this answers with
+ * a hue, which the heading's dot and every badge under it inherit.
+ *
+ * The three are written out per topic rather than mixed down from one, because
+ * `color-mix()` does not appear in this file. html2canvas threw on it while the
+ * page drew its own PDF, and that is no longer how the download works; see the
+ * note at the top of `tokens.css`.
+ */
+[data-topic="frontend"] {
+  --hue: var(--topic-1);
+  --wash: rgb(47 127 224 / 0.14);
+  --line: rgb(47 127 224 / 0.45);
+}
+[data-topic="backend"] {
+  --hue: var(--topic-2);
+  --wash: rgb(20 166 132 / 0.14);
+  --line: rgb(20 166 132 / 0.45);
+}
+[data-topic="cloud"] {
+  --hue: var(--topic-3);
+  --wash: rgb(122 92 214 / 0.14);
+  --line: rgb(122 92 214 / 0.45);
+}
+[data-topic="testing"] {
+  --hue: var(--topic-4);
+  --wash: rgb(209 145 42 / 0.14);
+  --line: rgb(209 145 42 / 0.45);
+}
+[data-topic="craft"] {
+  --hue: var(--topic-5);
+  --wash: rgb(224 79 146 / 0.14);
+  --line: rgb(224 79 146 / 0.45);
+}
+
+/* Dark glass is thinner, so the same wash disappears into it. */
+:root[data-theme="dark"] [data-topic="frontend"] {
+  --wash: rgb(90 168 255 / 0.22);
+  --line: rgb(90 168 255 / 0.58);
+}
+:root[data-theme="dark"] [data-topic="backend"] {
+  --wash: rgb(61 240 196 / 0.22);
+  --line: rgb(61 240 196 / 0.58);
+}
+:root[data-theme="dark"] [data-topic="cloud"] {
+  --wash: rgb(169 140 255 / 0.22);
+  --line: rgb(169 140 255 / 0.58);
+}
+:root[data-theme="dark"] [data-topic="testing"] {
+  --wash: rgb(255 196 107 / 0.22);
+  --line: rgb(255 196 107 / 0.58);
+}
+:root[data-theme="dark"] [data-topic="craft"] {
+  --wash: rgb(255 105 180 / 0.22);
+  --line: rgb(255 105 180 / 0.58);
+}

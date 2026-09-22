@@ -1,0 +1,267 @@
+/**
+ * The Tailwind entry, and the bridge between the design tokens and the
+ * utilities that name them.
+ *
+ * `@theme` does not REPLACE `theme.css` — it points at it. Every value below
+ * is a `var()`, so the tokens stay the single source, keep working in the
+ * hand-written CSS that utilities cannot express, and keep switching with the
+ * theme at runtime. A copy of the numbers here would be a second source that
+ * silently drifts.
+ */
+@import "tailwindcss";
+
+/* Variants for the state attributes this app already sets, so a component
+   writes `shown:opacity-100` rather than repeating the selector each time. */
+@custom-variant shown (&[data-shown="true"]);
+@custom-variant current (&[data-current="true"]);
+@custom-variant entered (&[data-entered="true"]);
+@custom-variant done (&[data-done="true"]);
+
+@theme {
+  --color-page: var(--page);
+  --color-ink: var(--page-ink);
+  --color-soft: var(--page-soft);
+  --color-faint: var(--page-faint);
+  --color-line: var(--page-line);
+  --color-glass: var(--glass-fill);
+  --color-glass-strong: var(--glass-fill-strong);
+  --color-hair: var(--glass-hair);
+
+  /* The three the glass tokens do not cover: what a link or a pressed tag is
+     set in, what a mark is filled with, and what a failure is written in. */
+  --color-accent: var(--page-accent);
+  --color-high: var(--page-high);
+  --color-warn: var(--page-warn);
+
+  /* The design's two breakpoints, and only those: 360 is the base. */
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1200px;
+
+  --font-serif: var(--serif);
+  --font-sans: var(--sans);
+  --font-academic: var(--academic);
+
+  --ease-page: var(--ease);
+
+  /**
+   * One radius for every glass surface — the card, the bar, the buttons. They
+   * were 26px, 999px and 999px, which is three shapes for one material.
+   *
+   * `card` is that shape at the size the sections below the stage use it: a
+   * role, a recommendation, a list of them down a narrow column. 26px on a
+   * box 64px tall is not the same shape, it is a pill.
+   *
+   * A round control (an icon in a circle) is a different shape on purpose,
+   * not an inconsistency, so it has its own token — and so does a field,
+   * which is a box to type in rather than a surface to read off.
+   */
+  --radius-glass: 26px;
+  --radius-card: 18px;
+  --radius-field: 12px;
+  --radius-round: 50%;
+
+  /* The line entrance. The delay is per element and stays an inline style. */
+  --animate-line-in: lineIn var(--dur-reveal) var(--ease) both;
+  --animate-line-out: lineOut var(--dur-reveal) var(--ease) both;
+  --animate-beam: beamTravel 6s linear infinite;
+
+  /* The mark beside a role that has not ended. It is slow on purpose: a fast
+     pulse is an alert, and this is only a job somebody still has. */
+  --animate-live: livePulse 2.6s var(--ease) infinite;
+
+  /**
+   * Section 5's one life.
+   *
+   * `bloom` is the one-shot a card's picture plays when it reaches the top of
+   * the deck: it goes out to the soft, saturated impression of itself and
+   * comes back, so that "plays once on arrival" and "replays on hover" can
+   * both be true of the same animation.
+   *
+   * `drift` and `sheen` were the award tiles breathing. The tiles went when a
+   * school's card and a prize's card became the same card.
+   */
+  --animate-bloom-haze: bloomHaze calc(var(--dur-slow) * 2) var(--ease) both;
+  --animate-bloom-sharp: bloomSharp calc(var(--dur-slow) * 2) var(--ease) both;
+
+  /**
+   * What the two Radix components animate on.
+   *
+   * The accordion's height comes from `--radix-accordion-content-height`, a
+   * value Radix measures and writes on the element — which is the whole reason
+   * the FAQ is a Radix accordion now. A hand-rolled one has to guess a
+   * `max-height`, and a guess either clips a long answer or spends the
+   * duration on empty space above a short one.
+   *
+   * Both are on the page's own `--dur` and `--ease`: a library's component is
+   * still the page's motion.
+   */
+  --animate-accordion-down: accordionDown var(--dur) var(--ease);
+  --animate-accordion-up: accordionUp var(--dur) var(--ease);
+  --animate-fade-in: fadeIn var(--dur) var(--ease);
+  --animate-fade-out: fadeOut var(--dur) var(--ease);
+}
+
+@keyframes accordionDown {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+  }
+}
+
+@keyframes accordionUp {
+  from {
+    height: var(--radix-accordion-content-height);
+  }
+  to {
+    height: 0;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/**
+ * The page's ONE entrance, as the pair of keyframes a flag plays it with.
+ *
+ * Out of its own centre and back into it: a scale and an opacity, and no
+ * translate at all. Every section on the page makes this entrance, and
+ * `common/utils/emerge.ts` holds the two numbers below so that the flag-driven
+ * form here and the scroll-driven form there cannot drift apart.
+ *
+ * They move `scale`, not `transform`. Tailwind v4 writes `scale-*` to the
+ * individual `scale` property; keyframes on `transform` would compose with it
+ * instead of replacing it, and a line would settle at the wrong size after its
+ * own animation had finished.
+ */
+
+@keyframes lineIn {
+  from {
+    opacity: 0;
+    scale: 0.92;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+@keyframes lineOut {
+  from {
+    opacity: 1;
+    scale: 1;
+  }
+  to {
+    opacity: 0;
+    scale: 0.92;
+  }
+}
+
+@keyframes livePulse {
+  0%,
+  100% {
+    opacity: 0.45;
+    scale: 0.82;
+  }
+  50% {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+@keyframes beamTravel {
+  to {
+    --beam-angle: 360deg;
+  }
+}
+
+/**
+ * A gradient cut down to its own border: `exclude` between a border-box layer
+ * and a content-box layer leaves only the ring between them. The thickness is
+ * whatever padding the element is given.
+ *
+ * It is a utility rather than an arbitrary value because the two mask layers
+ * are comma-separated, which is exactly what Tailwind's bracket syntax cannot
+ * carry without becoming unreadable.
+ *
+ * Two components use it: `BeamButton`, whose ring travels, and `GradientRing`,
+ * whose does not.
+ */
+/*
+ * The page's focus ring, for a control that hands it to the BOX around it.
+ *
+ * A field that fills a bordered wrapper must not draw its own: the ring would
+ * land INSIDE the box, which reads as a second border rather than as focus.
+ * The field turns the base ring off and the wrapper asks for this on
+ * `focus-within`, so there is one ring and it is on the outside.
+ *
+ * The two numbers are the base rule's in `theme.css`, written twice because a
+ * layer and a utility cannot share a declaration. They have to stay equal.
+ */
+@utility focus-ring {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+
+@utility mask-ring {
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+}
+
+/* An unmasked gradient is a filled blob over whatever it was meant to edge,
+   which is worse than no ring at all — so where the mask is unavailable it
+   simply is not drawn, and the hairline underneath is the border. */
+@supports not (mask-composite: exclude) {
+  .mask-ring {
+    display: none;
+  }
+}
+
+/* A Safari without backdrop-filter gets an opaque-enough fill instead of a
+   pane you can read the text behind. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  [data-pane] {
+    background: var(--glass-fill-strong);
+  }
+}
+
+/* Section 5's image, blooming into an impression of itself and back. */
+@keyframes bloomHaze {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.92;
+  }
+}
+
+@keyframes bloomSharp {
+  0%,
+  100% {
+    opacity: 1;
+    filter: blur(0);
+  }
+  50% {
+    opacity: 0.25;
+    filter: blur(2px);
+  }
+}

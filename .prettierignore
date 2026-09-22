@@ -1,0 +1,14 @@
+node_modules
+dist
+pnpm-lock.yaml
+
+# Handled by Biome
+*.js
+*.jsx
+*.ts
+*.tsx
+*.mjs
+*.cjs
+*.json
+*.jsonc
+*.css
