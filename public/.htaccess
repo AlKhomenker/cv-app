@@ -5,7 +5,7 @@
 #
 # There is deliberately NO SPA rewrite here. The page has one route and no
 # router, and a catch-all rewrite to index.html is what turns a missing
-# `cv/Alina-Khomenker-CV.pdf` into an HTML page saved under a `.pdf` name —
+# `cv/CV-Alina-Khomenker-Senior-Fullstack-Engineer.pdf` into an HTML page saved under a `.pdf` name —
 # the failure vite.config.ts guards the build against. A 404 must stay a 404.
 
 # UTF-8 for the text served here, so Hebrew and the typographic dashes are

@@ -5,7 +5,7 @@ The CV as a **file**, and the control that hands it over.
 ## Where the file is
 
 ```
-apps/CvCard/public/cv/Alina-Khomenker-CV.pdf
+apps/CvCard/public/cv/CV-Alina-Khomenker-Senior-Fullstack-Engineer.pdf
 ```
 
 That path is named once, in `src/config.ts` (`CV_FILE`), and turned into a URL

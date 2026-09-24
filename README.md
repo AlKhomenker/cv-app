@@ -14,7 +14,7 @@ pnpm build      # tsc --noEmit && vite build -> dist/
 pnpm preview    # serve the built dist/
 ```
 
-`pnpm build` fails if `public/cv/Alina-Khomenker-CV.pdf` is missing. That is
+`pnpm build` fails if `public/cv/CV-Alina-Khomenker-Senior-Fullstack-Engineer.pdf` is missing. That is
 deliberate: the download hands over the file itself, and without it a static
 host answers with `index.html`, which the browser then saves under a `.pdf`
 name that no viewer will open.

@@ -23,7 +23,7 @@ export const CONTACT_EMAIL = "alinahom@me.com";
  * keep at this path and the two constants below are the only place that says
  * so. Replacing the CV is replacing that file.
  */
-export const CV_FILE = "cv/Alina-Khomenker-CV.pdf";
+export const CV_FILE = "cv/CV-Alina-Khomenker-Senior-Fullstack-Engineer.pdf";
 export const CV_FILENAME = "CV Senior FullStack Engineer Alina Khomenker.pdf";
 
 /** A submission sooner than this after the page opened is a robot. */
