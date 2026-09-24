@@ -41,35 +41,19 @@ export const en: LocaleContent = {
     blocks: [
       {
         id: "craft",
-        text: "I'm a Senior Full-Stack Engineer, Frontend Oriented with 6+ years of experience, specializing in React, TypeScript, and modern frontend architecture, with strong .NET and C# backend expertise."
-      },
-      {
-        id: "ownership",
-        text: "Owns frontend architecture across the full product lifecycle, from technical design and implementation to delivery, maintenance and continuous improvement."
+        text: "Senior Full-Stack Engineer (Frontend oriented) with 6+ years of experience building high-performance web applications with React and TypeScript, backed by hands-on .NET / C# and Node.js backend development."
       },
       {
         id: "impact",
-        text: "Reviews around 80% of the company's client pull requests and led the refactoring of approximately 70% of the production frontend, significantly improving code quality, maintainability and performance."
-      },
-      {
-        id: "platform",
-        text: "Works with a Turborepo-based monorepo and contributes to a multi-client healthcare platform where one codebase supports different clients through configuration and client-specific workflows."
+        text: "Technical leader who reviews ~80% of the company's client-side pull requests, led the refactoring of ~70% of a production frontend, and owns greenfield products end to end."
       },
       {
         id: "ai",
-        text: "Developed AI-assisted engineering workflows by defining AI skills, coding guidelines, and reusable rules for Claude agents to improve consistency, automation, and development efficiency."
-      },
-      {
-        id: "security",
-        text: "Implemented PostHog analytics while working with healthcare data and considering HIPAA and PHI compliance requirements."
+        text: "Practitioner of the Agentic Development Lifecycle (ADLC): built custom Claude skills and rules for loop engineering, analytics, performance review, and compliance-based security guards, and set company-wide client-side AI development standards."
       },
       {
         id: "lead",
-        text: "Coordinates technical tasks across multiple teams, breaks down complex requirements, aligns implementation efforts, and drives end-to-end delivery."
-      },
-      {
-        id: "ui",
-        text: "Built a reusable UI kit with React, TypeScript, Tailwind CSS, and Storybook, establishing consistent components, design patterns, and frontend standards across products."
+        text: "Owns frontend architecture across the full product lifecycle, from technical design and implementation to delivery, maintenance and continuous improvement. Experienced in running parallel projects and mentoring junior engineers."
       }
     ]
   },
@@ -132,7 +116,7 @@ export const en: LocaleContent = {
         id: "craft",
         label: "AI, architecture and tooling",
         items: [
-          "ADLS System",
+          "ADLC System",
           "Claude",
           "AI agents",
           "Custom AI skills",

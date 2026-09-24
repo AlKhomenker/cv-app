@@ -41,35 +41,19 @@ export const he: LocaleContent = {
     blocks: [
       {
         id: "craft",
-        text: "אני Senior Full-Stack Engineer, Frontend Oriented עם למעלה מ-6 שנות ניסיון, מתמחה ב-React, TypeScript וארכיטקטורת Frontend מודרנית, עם ניסיון משמעותי ב-.NET וב-C#."
-      },
-      {
-        id: "ownership",
-        text: "אחראית על ארכיטקטורת ה-Frontend לאורך כל מחזור החיים של המוצר — מתכנון טכני ויישום ועד Delivery, תחזוקה ושיפור מתמשך."
+        text: "Senior Full-Stack Engineer עם למעלה מ-6 שנות ניסיון בבניית אפליקציות Web בעלות ביצועים גבוהים ב-React וב-TypeScript, לצד פיתוח Backend מעשי ב-.NET / C# וב-Node.js."
       },
       {
         id: "impact",
-        text: "סוקרת כ-80% מה-Client Pull Requests בחברה והובלתי Refactoring של כ-70% מה-Frontend בפרודקשן, תוך שיפור משמעותי של איכות הקוד, התחזוקתיות והביצועים."
-      },
-      {
-        id: "platform",
-        text: "עובדת עם Monorepo המבוסס על Turborepo ותורמת לפלטפורמת Healthcare מרובת לקוחות, שבה Codebase משותף מותאם ללקוחות שונים באמצעות Configuration ו-Workflows ייעודיים."
+        text: "מובילה טכנית: סוקרת כ-80% מה-Client-Side Pull Requests בחברה, הובילה Refactoring של כ-70% מה-Frontend בפרודקשן ואחראית על מוצרי Greenfield מקצה לקצה."
       },
       {
         id: "ai",
-        text: "פיתחתי תהליכי עבודה מבוססי AI באמצעות הגדרת AI Skills, כללי Coding ו-Rules לשימוש עם Claude Agents, במטרה לשפר עקביות, אוטומציה ויעילות בתהליך הפיתוח."
-      },
-      {
-        id: "security",
-        text: "הטמעתי PostHog Analytics תוך עבודה עם מידע רפואי והתחשבות בדרישות HIPAA ו-PHI."
+        text: "עובדת לפי ה-Agentic Development Lifecycle (ADLC): בנתה Claude Skills ו-Rules ייעודיים ל-Loop Engineering, Analytics, Performance Review ו-Security Guards מבוססי Compliance, וקבעה סטנדרטים לפיתוח Client-Side בעזרת AI ברמת החברה."
       },
       {
         id: "lead",
-        text: "מנהלת ומתאמת משימות טכניות בין מספר צוותים, מפרקת דרישות מורכבות, מתאמת את עבודת הצוותים ומובילה Delivery מקצה לקצה."
-      },
-      {
-        id: "ui",
-        text: "בניתי UI Kit רב-שימושי באמצעות React, TypeScript, Tailwind CSS ו-Storybook, והגדרתי Components, Design Patterns וסטנדרטים משותפים למספר מוצרים."
+        text: "בעלת ניסיון בניהול פרויקטים במקביל ובחניכת מפתחים ג'וניורים."
       }
     ]
   },
@@ -131,7 +115,7 @@ export const he: LocaleContent = {
         id: "craft",
         label: "בינה מלאכותית, ארכיטקטורה וכלים",
         items: [
-          "ADLS System",
+          "ADLC System",
           "Claude",
           "AI agents",
           "Custom AI skills",

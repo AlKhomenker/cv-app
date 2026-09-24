@@ -22,20 +22,16 @@ A small glyph over the sentence, one per block, saying what the block is about
 before it is read — and, as the strip moves, the line between one block and the
 next.
 
-It is chosen by the block's **id** and never by its words — the eight blocks
-are the same eight in both languages, and a mark read off a sentence would
+It is chosen by the block's **id** and never by its words — the four blocks
+are the same four in both languages, and a mark read off a sentence would
 change when the sentence was translated. The map is `utils/glyphs.ts`:
 
-| block       | mark             | what it heads                                |
-| ----------- | ---------------- | -------------------------------------------- |
-| `craft`     | `Code`           | React and TypeScript over .NET and C#        |
-| `ownership` | `Compass`        | owning the architecture across the lifecycle |
-| `impact`    | `GitPullRequest` | the reviews, and the refactor that was led   |
-| `platform`  | `Boxes`          | a monorepo, one codebase, several clients    |
-| `ai`        | `Bot`            | AI skills, rules and agents                  |
-| `security`  | `ShieldCheck`    | health data and what handling it takes       |
-| `lead`      | `Users`          | work coordinated across teams                |
-| `ui`        | `Component`      | the reusable kit and its standards           |
+| block    | mark             | what it heads                                  |
+| -------- | ---------------- | ---------------------------------------------- |
+| `craft`  | `Code`           | React and TypeScript over .NET, C# and Node.js |
+| `impact` | `GitPullRequest` | the reviews, the refactor, the products owned  |
+| `ai`     | `Bot`            | the agentic lifecycle, Claude skills and rules |
+| `lead`   | `Users`          | parallel projects and mentoring                |
 
 A block whose id is not in that map simply has no mark — a new sentence in the
 strip is never a strip that fails to draw. Which is also why the map has to be
