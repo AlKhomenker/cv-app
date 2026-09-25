@@ -337,7 +337,6 @@ export const he: LocaleContent = {
     items: [
       {
         id: "manager",
-        name: "שם ומשפחה",
         initials: "NS",
         role: "מנהל פיתוח, Wotch",
         relation: "עבדנו יחד על Transperra",
@@ -345,7 +344,6 @@ export const he: LocaleContent = {
       },
       {
         id: "frontend",
-        name: "שם ומשפחה",
         initials: "NS",
         role: "מהנדס פרונטאנד בכיר, Wotch / Maccabi",
         relation: "עשינו code review משותף",
@@ -353,7 +351,6 @@ export const he: LocaleContent = {
       },
       {
         id: "product",
-        name: "שם ומשפחה",
         initials: "NS",
         role: "מנהל מוצר, GoTech / Varonis",
         relation: "בנינו יחד את הדשבורדים",
@@ -361,7 +358,6 @@ export const he: LocaleContent = {
       },
       {
         id: "cto",
-        name: "שם ומשפחה",
         initials: "NS",
         role: "CTO, Exposebox",
         relation: "",
