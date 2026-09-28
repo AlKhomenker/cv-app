@@ -1,8 +1,9 @@
 import type { CSSProperties } from "react";
 import { Icon, type IconName } from "@/common/ui/Icon";
+import { QrCode } from "@/common/ui/QrCode";
 import type { ContactKind, ContactLine } from "@/content";
 import { useLocale } from "@/i18n";
-import { QrCode } from "./QrCode";
+import { isProfile } from "../utils/kinds";
 
 export interface ContactRowProps {
   line: ContactLine;
@@ -20,6 +21,7 @@ const GLYPH: Record<ContactKind, IconName> = {
   phone: "phone",
   email: "mail",
   linkedin: "linkedin",
+  behance: "behance",
   place: "pin"
 };
 
@@ -72,10 +74,11 @@ const AWAY = { target: "_blank", rel: "noopener noreferrer" } as const;
 export function ContactRow({ line, style, fine, copied, onCopy }: ContactRowProps) {
   const { content } = useLocale();
   const place = line.kind === "place";
-  const away = line.kind === "linkedin" ? AWAY : {};
-  // The LinkedIn row shows words rather than its address now, so what a cursor
-  // takes from it is the address underneath them.
-  const target = line.kind === "linkedin" ? line.href : line.value;
+  const profile = isProfile(line.kind);
+  const away = profile ? AWAY : {};
+  // A profile row shows words rather than its address, so what a cursor takes
+  // from it is the address underneath them.
+  const target = profile ? line.href : line.value;
   const latin = !RTL.test(line.value);
 
   const glyph = <Icon name={GLYPH[line.kind]} className={`${STROKE} ${place ? "stroke-soft" : "stroke-ink"}`} />;

@@ -24,7 +24,7 @@ export const en: LocaleContent = {
   person: {
     name: "Alina Khomenker",
     role: "Senior Full-Stack Engineer",
-    tagline: "6+ years, frontend oriented"
+    tagline: "7 years, frontend oriented"
   },
   ui: {
     skip: "Skip to content",
@@ -34,6 +34,7 @@ export const en: LocaleContent = {
     present: "Present",
     rating: "{label}: {rating} out of 5"
   },
+  siteQr: { open: "Show a QR code for this page", code: "QR code for this page" },
   opening: { write: "Contact me", download: "Download CV" },
   summary: {
     title: "Summary",
@@ -41,19 +42,19 @@ export const en: LocaleContent = {
     blocks: [
       {
         id: "craft",
-        text: "Senior Full-Stack Engineer (Frontend oriented) with 6+ years of experience building high-performance web applications with React and TypeScript, backed by hands-on .NET / C# and Node.js backend development."
+        text: "Senior Full-Stack Engineer (Frontend oriented) with 7 years of experience building high-performance web applications with React and TypeScript, backed by full-stack delivery on .NET / C# and Node.js."
       },
       {
         id: "impact",
-        text: "Technical leader who reviews ~80% of the company's client-side pull requests, led the refactoring of ~70% of a production frontend, and owns greenfield products end to end."
+        text: "Client-side owner of a multi-client healthcare platform. Reviews ~{share} of the company's client-side pull requests and led the refactoring of ~70% of a production frontend."
       },
       {
         id: "ai",
-        text: "Practitioner of the Agentic Development Lifecycle (ADLC): built custom Claude skills and rules for loop engineering, analytics, performance review, and compliance-based security guards, and set company-wide client-side AI development standards."
+        text: "Developed Claude rules, skills and plugins aligned with company standards, which brought ~80% of the codebase to company quality standards, accelerated new feature delivery, improved process transparency and test coverage, and made AI adoption stable and secure."
       },
       {
         id: "lead",
-        text: "Owns frontend architecture across the full product lifecycle, from technical design and implementation to delivery, maintenance and continuous improvement. Experienced in running parallel projects and mentoring junior engineers."
+        text: "Mentors junior developers, leads technical design planning and runs parallel projects, from architecture decisions to delivery."
       }
     ]
   },
@@ -71,64 +72,86 @@ export const en: LocaleContent = {
         id: "frontend",
         label: "Frontend",
         items: [
-          "React",
+          "React 19",
           "TypeScript",
+          "JavaScript",
           "Next.js",
-          "React Hooks",
-          "React Router",
+          "Vite",
           "Zustand",
           "TanStack Query",
-          "Zod",
           "Redux Toolkit",
-          "RTK Query",
           "MobX",
           "RxJS",
           "React Hook Form",
+          "Zod",
+          "React Router",
+          "Ky",
+          "Orval",
+          "Angular",
           "Tailwind CSS",
+          "SCSS",
+          "MUI",
           "HTML",
-          "CSS",
-          "SCSS"
+          "CSS"
         ]
       },
       {
         id: "backend",
         label: "Backend and APIs",
-        items: [".NET", "C#", "Node.js", "REST APIs", "GraphQL", "Python", "Java", "SQL", "OpenAPI/Swagger", "Postman"]
-      },
-      {
-        id: "cloud",
-        label: "Cloud and data",
-        items: ["Azure", "AWS", "Docker", "CI/CD", "MySQL", "PostgreSQL", "MongoDB", "Redis"]
-      },
-      {
-        id: "testing",
-        label: "Testing and quality",
         items: [
-          "Playwright",
-          "React Testing Library (Vitest)",
-          "Unit testing",
-          "Integration testing",
-          "E2E testing",
-          "Code review"
+          ".NET",
+          "C#",
+          "ASP.NET Core",
+          "Node.js",
+          "REST APIs",
+          "GraphQL",
+          "Modular Monolith",
+          "Temporal",
+          "Kafka",
+          "WebSocket",
+          "Server-Sent Events (SSE)",
+          "OpenAPI / Swagger",
+          "Python",
+          "Java Spring"
         ]
       },
       {
+        id: "cloud",
+        label: "Cloud and databases",
+        items: ["AWS S3", "Docker", "CI/CD", "PostgreSQL", "MongoDB", "Redis"]
+      },
+      {
+        id: "testing",
+        label: "Testing",
+        items: ["Playwright", "Storybook", "Vitest", "Unit testing", "Integration testing", "E2E testing"]
+      },
+      {
         id: "craft",
-        label: "AI, architecture and tooling",
+        label: "AI, architecture and product",
         items: [
-          "ADLC System",
           "Claude",
+          "MCP",
+          "Custom Claude skills, rules and plugins",
           "AI agents",
-          "Custom AI skills",
           "Agentic workflows",
+          "System prompts",
+          "AI code governance",
+          "Performance optimization",
           "Clean Architecture",
           "SOLID",
           "Design patterns",
-          "Modular architecture",
-          "Performance",
+          "Code review",
+          "Technical debt reduction",
           "Git",
           "GitHub",
-          "Atlassian Suite"
+          "Jira",
+          "Confluence",
+          "Figma",
+          "Design systems",
+          "UI Kit",
+          "Component-driven development",
+          "Accessibility",
+          "Product thinking"
         ]
       }
     ]
@@ -160,30 +183,37 @@ export const en: LocaleContent = {
         start: { year: 2025, month: 1 },
         end: null,
         tech: [
-          "Turborepo",
-          "Vite",
-          "React",
+          "React 19",
           "TypeScript",
+          "Vite",
           "TanStack Query",
           "Zustand",
-          "React Routing",
           "Tailwind CSS",
           ".NET",
           "C#",
-          "REST APIs",
-          "OpenAPI/Swagger",
-          "AWS"
+          "ASP.NET Core",
+          "Temporal",
+          "Kafka",
+          "Redis",
+          "Server-Sent Events (SSE)",
+          "OpenAPI / Swagger",
+          "AWS S3",
+          "Claude",
+          "MCP"
         ],
         bullets: [
-          "Client-side owner for the Transperra product: frontend technical direction, implementation and delivery across the full product lifecycle.",
-          "Worked across frontend and backend, building end-to-end product functionality rather than only the UI layer.",
-          "Implemented Twilio communication on both sides, including OTP flows and the messaging behind the authentication system.",
-          "Developed a new backend Announcements module — APIs, business logic, persistence and AWS S3 image storage for its media.",
-          "Built and integrated full-stack features, connecting React/TypeScript interfaces with .NET APIs and shared services.",
-          "Multi-client healthcare platform: one codebase serving different clients through per-client configuration, workflows and data ingestion."
+          "Own client-side architecture and delivery for a healthcare platform where one codebase serves several clients through client-specific configuration, workflows and data ingestion.",
+          "Developed Claude rules, skills and plugins aligned with company standards for code quality, testing, performance review, analytics and compliance-based security; brought ~80% of the codebase to company standards, accelerated new feature delivery, and improved process transparency and test coverage.",
+          "Defined company-wide client-side AI development standards, including MCP configurations, skills, plugins and agent settings, making AI adoption stable and secure; review and validate AI-generated code.",
+          "Review ~80% of the company's client-side pull requests.",
+          "Deliver end-to-end features that connect React 19 / TypeScript interfaces to .NET 10 / ASP.NET Core REST APIs with OpenAPI-generated TypeScript clients.",
+          "Develop features in a .NET modular monolith with Temporal workflows for long-running processes, Kafka event streaming and Redis caching.",
+          "Built real-time UI updates with Server-Sent Events (SSE) and polling.",
+          "Implemented Twilio-based OTP authentication and user communication flows across frontend and backend.",
+          "Built a backend Announcements module: REST APIs, business logic, data persistence and AWS S3 media storage."
         ],
         stack:
-          "Turborepo, Vite, React, TypeScript, TanStack Query, Zustand, Tailwind CSS, .NET, C#, REST APIs, OpenAPI/Swagger, AWS, Redis, Posthog, Twilio"
+          "React 19, TypeScript, Vite, TanStack Query, Zustand, Tailwind CSS, .NET 10, C#, ASP.NET Core, REST APIs, OpenAPI, Temporal, Kafka, Redis, SSE, AWS S3, Twilio, Claude, MCP"
       },
       {
         id: "maccabi",
@@ -199,29 +229,20 @@ export const en: LocaleContent = {
           "Zustand",
           "TanStack Query",
           "Recoil",
-          "MUI",
-          "Tailwind CSS",
-          "Playwright",
-          "React Testing Library (Vitest)",
-          "Storybook",
-          "MySQL",
-          "Kafka",
-          "RabbitMQ",
           "WebSocket",
-          ".NET",
-          "C#",
-          "REST APIs",
-          "OpenAPI/Swagger"
+          "Tailwind CSS",
+          "Storybook",
+          "Vitest",
+          "Playwright"
         ],
         bullets: [
-          "Led the refactoring of roughly 70% of the production frontend, improving code quality, maintainability and performance.",
-          "Replaced Recoil with Zustand and React Query, separating client state from server data.",
-          "Implemented a system-wide logging mechanism giving consistent and reliable application logging.",
-          "Introduced WebSocket real-time communication for instant data delivery and reactive UI updates.",
-          "Built complex features on React 18, TypeScript and React Hooks, with unit and E2E tests in Vitest and Playwright.",
-          "Reusable components in Storybook and Tailwind CSS; architecture decisions, code review, and mentoring juniors through onboarding."
+          "Led the refactoring of ~70% of the production frontend, improving code quality, maintainability and performance.",
+          "Replaced Recoil with Zustand and TanStack Query, separating client state from server data.",
+          "Introduced WebSocket real-time communication and a system-wide logging mechanism.",
+          "Set up unit and E2E testing with Vitest and Playwright; built a reusable UI Kit with Storybook and Tailwind CSS.",
+          "Mentored junior developers, made architectural decisions, conducted code reviews and led technical design planning."
         ],
-        stack: "React 18, TypeScript, Zustand, React Query, Vitest, Playwright, Storybook, Tailwind CSS"
+        stack: "React, TypeScript, Zustand, TanStack Query, WebSocket, Vitest, Playwright, Storybook, Tailwind CSS"
       },
       {
         id: "varonis",
@@ -231,14 +252,12 @@ export const en: LocaleContent = {
         place: "Herzliya",
         start: { year: 2022, month: 6 },
         end: { year: 2022, month: 12 },
-        tech: ["React", "TypeScript", "Zustand", "Storybook", "SCSS", "MUI", "GraphQL", "MySQL"],
+        tech: ["React", "TypeScript", "Zustand", "GraphQL", "SCSS", "MUI", "D3", "Python"],
         bullets: [
-          "Built 5 specialised data dashboards visualising the benefit, risk, usage, cost and performance of AWS, Azure, Salesforce and Slack.",
-          "Data visualisation interfaces combining interactive charts, widgets and configurable dashboard components over large volumes of data.",
-          "Clear, reusable UI components that let clients monitor service usage and spot optimisation opportunities.",
-          "Integrated the frontend with GraphQL APIs and MySQL-backed services."
+          "Built reusable, custom data dashboards that visualize usage, cost, risk and performance of AWS, Azure, Salesforce and Slack services.",
+          "Built the graph system with D3, on React, TypeScript, Zustand, GraphQL, SCSS and MUI, with Python on the data side."
         ],
-        stack: "React, TypeScript, Zustand, Storybook, SCSS, MUI, GraphQL APIs, MySQL services"
+        stack: "React, TypeScript, Zustand, GraphQL, SCSS, MUI, D3, Python"
       },
       {
         id: "exposebox",
@@ -248,14 +267,12 @@ export const en: LocaleContent = {
         place: "Petah Tikva",
         start: { year: 2021, month: 9 },
         end: { year: 2022, month: 6 },
-        tech: ["React", "TypeScript", "MobX", "Context API", "REST APIs", "MUI"],
+        tech: ["React", "TypeScript", "MobX", "REST APIs", "MUI", "PostgreSQL", "Java"],
         bullets: [
-          "Worked on a SaaS platform for personalised marketing automation, aimed at highly targeted customer experiences.",
-          "Dashboard panels, pop-ups, notifications and interactive flows supporting customer journey personalisation.",
-          "Reusable components and application state with React, TypeScript, MobX and the Context API.",
-          "Integrated with REST APIs, and worked with MUI and custom theming for a consistent product experience."
+          "Developed dashboards, pop-ups, notifications and interactive flows for a marketing automation SaaS platform with React, TypeScript, MobX, REST APIs, PostgreSQL and Java.",
+          "Designed reusable dashboard systems with custom MUI theming for a consistent product experience."
         ],
-        stack: "React, TypeScript, MobX, Context API, REST, MUI with custom theming"
+        stack: "React, TypeScript, MobX, REST APIs, MUI with custom theming, PostgreSQL, Java"
       },
       {
         id: "lomda",
@@ -265,31 +282,25 @@ export const en: LocaleContent = {
         place: "Rehovot",
         start: { year: 2020, month: 10 },
         end: { year: 2021, month: 9 },
-        tech: ["React", "Node.js", "Redux, javascript", "REST APIs"],
+        tech: ["React", "Redux", "MUI", "MySQL", "Node.js"],
         bullets: [
-          "International e-learning platform for remote education, with interactive lessons, debates and video conferencing.",
-          "Multiple lesson types, automatic assessment, online learning workflows and custom course creation.",
-          "Interactive interfaces built for personalised learning and active student participation.",
-          "Worked across the frontend and the backend with React and Node.js, with application state in Redux."
+          "Built an international e-learning platform with interactive lessons, automatic assessments, video conferencing and course creation, using React, Redux, MUI, MySQL and Node.js."
         ],
-        stack: "React, Node.js, Redux"
+        stack: "React, Redux, MUI, MySQL, Node.js"
       },
       {
         id: "pillstate",
-        role: "Angular Software Engineer",
+        role: "Software Engineer",
         company: "Elpisor / Pillstate",
         companyUrl: "https://www.linkedin.com/company/elpisor/",
         place: "Rehovot",
         start: { year: 2020, month: 6 },
         end: { year: 2020, month: 10 },
-        tech: ["Angular", "TypeScript", "RxJS", "Java", "MongoDB"],
+        tech: ["Angular", "TypeScript", "RxJS", "Node.js", "MongoDB"],
         bullets: [
-          "Web and Android solution for streamlining the distribution of medical supplies to people with disabilities.",
-          "Frontend functionality and user workflows for the web platform in Angular and TypeScript.",
-          "Reactive application flows and data handling with RxJS, integrated with Node.js backend services.",
-          "Contributed to both web and mobile, working with Java, Android and MongoDB alongside the web stack."
+          "Developed web workflows for a medical supply distribution platform with Angular, TypeScript, RxJS, Node.js and MongoDB."
         ],
-        stack: "Angular, TypeScript, RxJS, Node.js, Java, MongoDB"
+        stack: "Angular, TypeScript, RxJS, Node.js, MongoDB"
       }
     ]
   },
@@ -475,6 +486,12 @@ export const en: LocaleContent = {
         label: "LinkedIn",
         value: "My LinkedIn",
         href: "https://www.linkedin.com/in/alina-khomenker-0a2532137/"
+      },
+      {
+        kind: "behance",
+        label: "Behance",
+        value: "My design portfolio",
+        href: "https://www.behance.net/alinakhomenker"
       },
       { kind: "place", label: "Location", value: "Hadera, Israel", href: "" }
     ]

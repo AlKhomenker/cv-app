@@ -1,6 +1,6 @@
 # Contacts
 
-Section 6. Four rows and one button.
+Section 6. Five rows and one button.
 
 ```
   Let's talk
@@ -11,6 +11,8 @@ Section 6. Four rows and one button.
   ────────────────────────────────────────────────────
   LinkedIn                          My LinkedIn   [in]  ← a QR appears above
   ────────────────────────────────────────────────────     this row on hover
+  Behance                   My design portfolio   [Bē]
+  ────────────────────────────────────────────────────
   Location                       Hadera, Israel   [⌖]
 
                    [ Write to me ]
@@ -24,7 +26,7 @@ into it as that section's last panel leaves.
 
 So does the pace. This is the one section that asks the reader for something
 rather than for their attention, and **once the rows have arrived nothing moves
-at all**. The whole of its motion is four rows making the page's one entrance —
+at all**. The whole of its motion is five rows making the page's one entrance —
 out of their own centre, `common/utils/emerge.ts` — one after another, and then
 stopping.
 
@@ -41,26 +43,27 @@ whole of what the behaviour asked for:
 
 Verified over the whole range: every row's arrival is monotonic in progress, and
 at no reading position is a later row ever further on than an earlier one. All
-four are in by progress 0.44, and the rest of the section is still.
+five are in by progress 0.54, and the rest of the section is still.
 
 **The first row is there with the title**, from the first frame, carried by the
 section's own `Emerge` rather than by the scroll — a title over an empty column
 reads as a section still loading rather than as one that has arrived. It is off
-the schedule entirely, and the counting starts at the row underneath, which is
-why the four rows now finish at 0.44 where they used to finish at 0.54. The
-button follows the last of them, as it always did.
+the schedule entirely, and the counting starts at the row underneath: the four
+counted rows under it finish at 0.54. The button follows the last of them, as
+it always did.
 
 ## What a press does, and what decides it
 
 **Capability, never viewport width.** A phone held sideways is a wide screen
 with no cursor on it.
 
-|          | a finger                       | a cursor                            |
-| -------- | ------------------------------ | ----------------------------------- |
-| Phone    | opens the dialler              | copies, and the row says so         |
-| Email    | opens the mail app             | copies, and the row says so         |
-| LinkedIn | opens the profile in a new tab | copies the address, and offers a QR |
-| Location | nothing; it is not a control   | nothing                             |
+|          | a finger                         | a cursor                            |
+| -------- | -------------------------------- | ----------------------------------- |
+| Phone    | opens the dialler                | copies, and the row says so         |
+| Email    | opens the mail app               | copies, and the row says so         |
+| LinkedIn | opens the profile in a new tab   | copies the address, and offers a QR |
+| Behance  | opens the portfolio in a new tab | copies the address                  |
+| Location | nothing; it is not a control     | nothing                             |
 
 A finger goes where the row goes, because that is the only useful thing a phone
 can do with an address. A cursor copies, because a desktop mail client opening
@@ -71,7 +74,7 @@ dismiss, and the answer is where the reader is already looking.
 Copying is the better default and not the only thing allowed, so a cursor also
 gets a small call control, a small mail control and a small profile control on
 the row. Those are real `tel:`, `mailto:` and `https:` links, which is also how
-"the four contacts are real links in the document at all times" stays true on a
+"the contacts are real links in the document at all times" stays true on a
 desktop.
 
 The location is not a control in either case. It answers a question and has
@@ -82,6 +85,15 @@ Copy failure is **silent**. A reader who pressed a phone number and got a dialog
 about a permissions model has been handed a problem instead of a number; the row
 simply does not change, and the number is still written on it.
 
+## Two rows are profiles
+
+LinkedIn and Behance are the same kind of row — a page on somebody else's site
+— and `utils/kinds.ts` (`isProfile`) is the one place that says so. Both show
+words rather than the address, both copy the address under a cursor, both open
+in a new tab. Only LinkedIn carries the hover QR: a recruiter takes the profile
+away, and the portfolio is one tap from it. The page's own QR is in the header —
+see `shell/Header/ui/SiteQr`.
+
 ## The glyph at the end of every row
 
 The LinkedIn row reads **"My LinkedIn"**, not the fifty characters of the URL
@@ -91,7 +103,7 @@ words, the glyph beside it is what says _whose_ page it goes to. A cursor still
 copies the **address**, never the words, because the words are not a thing that
 can be pasted anywhere.
 
-Every row now ends in a glyph, so the four values sit in one column and each
+Every row now ends in a glyph, so the values sit in one column and each
 row names itself without being read. Only under a cursor is that glyph a
 control; under a finger the row is already one link, and a second smaller link
 inside it is a worse target in the middle of a better one, so the glyph is
@@ -108,56 +120,9 @@ the set.
 
 ## The QR code
 
-Drawn here, from nothing. `utils/qr.ts` is a byte-mode encoder at
-error-correction level L, versions 1 to 6 — up to 134 bytes, which is every URL
-this page will ever hold, and six is the last version that carries no
-version-information block.
-
-It is not a package because a package is the wrong trade for one code of one
-URL: this file is smaller than the smallest QR library's bundle, has no
-dependency to keep current, and draws as a few dozen SVG rectangles — one per
-RUN of dark modules, not one per module — in `currentColor`, so it follows the
-theme with nothing to redraw.
-
-All eight masks are laid out and scored by the standard's four penalty rules,
-and the best is kept. The mask is not cosmetic: it is what stops the data
-drawing something a scanner would mistake for a finder pattern, and picking one
-without scoring is how a code that works on one phone fails on another.
-
-**What was checked**, because a QR code that is subtly wrong looks exactly like
-one that is right:
-
-- the generator polynomials for 7, 10 and 15 check codewords match the ones
-  published in the standard, coefficient for coefficient;
-- all eight format-bit strings for level L match the published table;
-- the finder patterns, the timing rows, the separators and the always-dark
-  module are where they belong;
-- and the finished matrix decodes back to the exact URL, in byte mode, at every
-  version from 1 to 6 — including each version's exact byte capacity, and a
-  UTF-8 string that is not Latin.
-
-That last check is now made by a reader written **against the standard rather
-than against this file**, and it is the whole reason the list above is worth
-anything. The read-back it replaced shared this file's own idea of where the
-modules go, so it agreed with the encoder about two things the standard
-disagreed with, and reported a clean decode both times:
-
-- **the first copy of the format bits was written backwards.** A scanner reads
-  that copy first, finds its BCH check fails, and falls back to the second one
-  — so the code read, and the copy meant to be the fallback was the only one
-  that worked.
-- **the module walk stepped onto the timing column instead of over it.** The
-  pairs of columns must run 5-4, 3-2, 1-0 once past column 6; shifting only the
-  pair that meets it and then carrying on from 6 visits one column twice, never
-  visits column 0, and turns the wrong way for everything to the left. The data
-  codewords are long placed by then, so only the tail of the error correction
-  landed wrong — five of fifteen check bytes on the profile URL. The code still
-  read, by being CORRECTED, which spends the budget that is supposed to survive
-  a thumbprint on the screen.
-
-Both are fixed. What the two have in common is worth keeping in mind for
-anything else hand-rolled from a spec: they were invisible to every test that
-was written from the same understanding as the code.
+The encoder is `common/ui/QrCode` now, shared with the header's page code; its
+README has how it is built and what was checked. What is left here is when this
+one shows.
 
 It renders on hover of the LinkedIn row, or on keyboard focus anywhere within
 it — the row is a copy control and a profile link now rather than one link, so
@@ -175,7 +140,7 @@ the shape it arrives in.
 
 ## Accessibility and reduced motion
 
-The four contacts are real links, in order, whatever the scroll is doing. Under
+The contacts are real links, in order, whatever the scroll is doing. Under
 reduced motion the reading position is simply taken as finished: the rows are in
 place from the first frame with no stagger, which is what the section is once it
 has arrived anyway.

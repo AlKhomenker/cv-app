@@ -8,7 +8,9 @@ export type IconName =
   | "menu"
   | "phone"
   | "linkedin"
+  | "behance"
   | "pin"
+  | "qr"
   | "star"
   | "sun"
   | "moon";
@@ -26,7 +28,11 @@ const PATHS: Record<IconName, string> = {
   // would be the only filled shape in the set. The two dots are zero-length
   // segments with a round cap, which is how a stroke-only icon gets a dot.
   linkedin: "M3.5 3.5h13v13h-13zM6.4 6.3v.01M6.4 9.3v5.2M9.8 14.5V9.3M9.8 11.4c0-1.2.9-2.1 2-2.1s2 .9 2 2.1v3.2",
+  // "Bē" in strokes, for the same reason the LinkedIn mark is drawn: no filled shapes in the set.
+  behance:
+    "M3.5 5.5v9M3.5 5.5h3.2a2.2 2.2 0 010 4.4H3.5M3.5 9.9h3.6a2.3 2.3 0 010 4.6H3.5M12 6.5h4M11.5 11.5h5a2.5 2.5 0 10-.73 1.77",
   pin: "M10 17.4c3.4-3.6 5.1-6.3 5.1-8.2a5.1 5.1 0 10-10.2 0c0 1.9 1.7 4.6 5.1 8.2zM10 7.3a1.6 1.6 0 100 3.2 1.6 1.6 0 000-3.2",
+  qr: "M3.5 3.5h5v5h-5zM11.5 3.5h5v5h-5zM3.5 11.5h5v5h-5zM6 6v.01M14 6v.01M6 14v.01M11.5 11.5v.01M14 14v.01M16.5 11.5v.01M16.5 16.5h-2M11.5 16.5v.01",
   star: "M10 1.8l2.5 5.1 5.6.8-4 3.9 1 5.6L10 14.6l-5.1 2.6 1-5.6-4-3.9 5.6-.8z",
   sun: "M10 6.4a3.6 3.6 0 100 7.2 3.6 3.6 0 000-7.2M10 1.6v1.8M10 16.6v1.8M3.5 3.5l1.3 1.3M15.2 15.2l1.3 1.3M1.6 10h1.8M16.6 10h1.8M3.5 16.5l1.3-1.3M15.2 4.8l1.3-1.3",
   moon: "M15.8 12.7A6.6 6.6 0 017.3 4.2a6.6 6.6 0 108.5 8.5z"

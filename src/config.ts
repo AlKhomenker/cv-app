@@ -26,5 +26,13 @@ export const CONTACT_EMAIL = "alinahom@me.com";
 export const CV_FILE = "cv/CV-Alina-Khomenker-Senior-Fullstack-Engineer.pdf";
 export const CV_FILENAME = "CV Senior FullStack Engineer Alina Khomenker.pdf";
 
+/**
+ * Where this page is published, which is what the header's QR code carries.
+ * It is the GitHub Pages address from `.github/workflows/deploy.yml`, written
+ * out rather than read from `location`, so a code shown from localhost or a
+ * preview still sends the phone to the real page.
+ */
+export const SITE_URL = "https://alkhomenker.github.io/cv-app/";
+
 /** A submission sooner than this after the page opened is a robot. */
 export const SPAM_GUARD_MS = 2000;

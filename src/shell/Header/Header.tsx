@@ -5,6 +5,7 @@ import type { HeaderLink } from "./types";
 import { HeaderNav } from "./ui/HeaderNav";
 import { LanguageToggle } from "./ui/LanguageToggle";
 import { MenuCapsule } from "./ui/MenuCapsule";
+import { SiteQr } from "./ui/SiteQr";
 import { ThemeToggle } from "./ui/ThemeToggle";
 
 export interface HeaderProps {
@@ -15,8 +16,8 @@ export interface HeaderProps {
 }
 
 /**
- * The bar across the top: the section names at one end, language and theme at
- * the other. The bar itself has no surface — no fill, no border, no shadow —
+ * The bar across the top: the section names at one end, the page's QR code,
+ * language and theme at the other. The bar itself has no surface — no fill, no border, no shadow —
  * so the names sit directly on the moving light. The only glass in it is the
  * two toggles, which are controls and need an edge to be pressable.
  *
@@ -71,6 +72,7 @@ export function Header({ links, shown, onPick }: HeaderProps) {
           <HeaderNav links={links} shown={labels.shown} onPick={onPick} />
         )}
         <div className="ms-auto flex flex-none items-center gap-2">
+          <SiteQr />
           <LanguageToggle />
           <ThemeToggle />
         </div>

@@ -1,10 +1,10 @@
 # Header
 
-The bar across the top: the section names at one end, language and theme at the
-other.
+The bar across the top: the section names at one end, and three toggles at the
+other — the page's QR code (`ui/SiteQr`), language and theme.
 
 The bar has **no surface of its own** — no fill, no border, no shadow. The
-names sit directly on the moving light. The only glass in it is the two
+names sit directly on the moving light. The only glass in it is the three
 toggles, which are controls and need an edge to read as pressable.
 
 It slides down from above the top edge once, on load, over `--dur-slow`.

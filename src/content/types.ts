@@ -209,7 +209,7 @@ export interface Question {
  * its value, where a tap goes, whether a cursor copies it instead, and whether
  * it is a control at all. A row never carries a flag the kind already answers.
  */
-export type ContactKind = "phone" | "email" | "linkedin" | "place";
+export type ContactKind = "phone" | "email" | "linkedin" | "behance" | "place";
 
 export interface ContactLine {
   kind: ContactKind;
@@ -238,6 +238,11 @@ export interface LocaleContent {
     /** "{label}: {rating} out of 5" — one sentence per locale, never joined. */
     rating: string;
   };
+  /**
+   * The header's QR control: `open` names the button, `code` names the code it
+   * shows. The address inside the code is `SITE_URL` in `config.ts`, not a word.
+   */
+  siteQr: { open: string; code: string };
   /** The opening shows the person's own lines; these are its two controls. */
   opening: { write: string; download: string };
   /**
@@ -305,7 +310,7 @@ export interface LocaleContent {
   /** Section 7. Seven questions, one answer open at a time. */
   faq: { title: string; items: Question[] };
   /**
-   * Section 6. Four rows and one button. `copied` is what a row says for a
+   * Section 6. Five rows and one button. `copied` is what a row says for a
    * moment after a cursor has taken its value; `call`, `mail` and `profile`
    * name the three small controls that still open the dialler, the mail app
    * and the profile.

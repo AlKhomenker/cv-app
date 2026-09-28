@@ -11,12 +11,12 @@ import { ContactRow } from "./ui/ContactRow";
 import { rowsDone, rowStyle } from "./utils/rows";
 
 /**
- * Section 6. Four rows and one button.
+ * Section 6. Five rows and one button.
  *
  * The register comes back: the grotesque after section 5's academic serif, and
  * glass after its paper. So does the quiet — this is the one section that asks
  * the reader for something rather than for their attention, and nothing in it
- * moves once the rows have arrived. The whole of its motion is four rows rising
+ * moves once the rows have arrived. The whole of its motion is five rows rising
  * eighteen pixels, one after another, and then stopping.
  *
  * The arrival is a function of `progress` and of nothing else, which is the
@@ -24,7 +24,7 @@ import { rowsDone, rowStyle } from "./utils/rows";
  * that has arrived stays, because the value is still 1 at any greater reading
  * position, and scrolling back up retracts them in reverse order for free.
  *
- * The four contacts are real links, in order, whatever the scroll is doing.
+ * The contacts are real links, in order, whatever the scroll is doing.
  */
 export function Contacts({ active, progress }: StageSectionProps) {
   const { content } = useLocale();

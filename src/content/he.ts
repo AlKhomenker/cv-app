@@ -24,7 +24,7 @@ export const he: LocaleContent = {
   person: {
     name: "אלינה חומנקר",
     role: "מהנדסת פול-סטאק בכירה",
-    tagline: "מעל 6 שנות ניסיון, עם התמחות בפרונטאנד"
+    tagline: "7 שנות ניסיון, עם התמחות בפרונטאנד"
   },
   ui: {
     skip: "דילוג לתוכן",
@@ -34,6 +34,7 @@ export const he: LocaleContent = {
     present: "כיום",
     rating: "{label}: {rating} מתוך 5"
   },
+  siteQr: { open: "הצגת קוד QR לדף הזה", code: "קוד QR לדף הזה" },
   opening: { write: "כתבו לי", download: "הורדת קורות חיים" },
   summary: {
     title: "תקציר",
@@ -41,19 +42,19 @@ export const he: LocaleContent = {
     blocks: [
       {
         id: "craft",
-        text: "Senior Full-Stack Engineer עם למעלה מ-6 שנות ניסיון בבניית אפליקציות Web בעלות ביצועים גבוהים ב-React וב-TypeScript, לצד פיתוח Backend מעשי ב-.NET / C# וב-Node.js."
+        text: "[[Senior Full-Stack Engineer]] עם התמחות בפרונטאנד ו-7 שנות ניסיון בבניית אפליקציות Web בעלות ביצועים גבוהים ב-React וב-TypeScript, לצד פיתוח פול-סטאק ב-[[.NET / C#]] וב-[[Node.js]]."
       },
       {
         id: "impact",
-        text: "מובילה טכנית: סוקרת כ-80% מה-Client-Side Pull Requests בחברה, הובילה Refactoring של כ-70% מה-Frontend בפרודקשן ואחראית על מוצרי Greenfield מקצה לקצה."
+        text: "אחראית צד הלקוח בפלטפורמת בריאות מרובת לקוחות. סוקרת כ-{share} מה-Pull Requests בצד הלקוח בחברה, והובילה Refactoring של כ-[[70%]] מה-Frontend בפרודקשן."
       },
       {
         id: "ai",
-        text: "עובדת לפי ה-Agentic Development Lifecycle (ADLC): בנתה Claude Skills ו-Rules ייעודיים ל-Loop Engineering, Analytics, Performance Review ו-Security Guards מבוססי Compliance, וקבעה סטנדרטים לפיתוח Client-Side בעזרת AI ברמת החברה."
+        text: "פיתחה Rules, Skills ו-Plugins ל-Claude בהתאם לסטנדרטים של החברה, שהביאו כ-[[80%]] מבסיס הקוד לסטנדרטי האיכות של החברה, האיצו את אספקת הפיצ'רים, שיפרו את שקיפות התהליכים ואת כיסוי הבדיקות, והפכו את אימוץ ה-AI ליציב ובטוח."
       },
       {
         id: "lead",
-        text: "בעלת ניסיון בניהול פרויקטים במקביל ובחניכת מפתחים ג'וניורים."
+        text: "חונכת מפתחים ג'וניורים, מובילה תכנון טכני ומנהלת פרויקטים במקביל, מהחלטות ארכיטקטורה ועד אספקה."
       }
     ]
   },
@@ -70,64 +71,86 @@ export const he: LocaleContent = {
         id: "frontend",
         label: "פרונטאנד",
         items: [
-          "React",
+          "React 19",
           "TypeScript",
+          "JavaScript",
           "Next.js",
-          "React Hooks",
-          "React Router",
+          "Vite",
           "Zustand",
           "TanStack Query",
-          "Zod",
           "Redux Toolkit",
-          "RTK Query",
           "MobX",
           "RxJS",
           "React Hook Form",
+          "Zod",
+          "React Router",
+          "Ky",
+          "Orval",
+          "Angular",
           "Tailwind CSS",
+          "SCSS",
+          "MUI",
           "HTML",
-          "CSS",
-          "SCSS"
+          "CSS"
         ]
       },
       {
         id: "backend",
         label: "בקאנד ו-APIs",
-        items: [".NET", "C#", "Node.js", "REST APIs", "GraphQL", "Python", "Java", "SQL", "OpenAPI/Swagger", "Postman"]
-      },
-      {
-        id: "cloud",
-        label: "ענן ונתונים",
-        items: ["Azure", "AWS", "Docker", "CI/CD", "MySQL", "PostgreSQL", "MongoDB", "Redis"]
-      },
-      {
-        id: "testing",
-        label: "בדיקות ואיכות",
         items: [
-          "Playwright",
-          "React Testing Library (Vitest)",
-          "Unit testing",
-          "Integration testing",
-          "E2E testing",
-          "Code review"
+          ".NET",
+          "C#",
+          "ASP.NET Core",
+          "Node.js",
+          "REST APIs",
+          "GraphQL",
+          "Modular Monolith",
+          "Temporal",
+          "Kafka",
+          "WebSocket",
+          "Server-Sent Events (SSE)",
+          "OpenAPI / Swagger",
+          "Python",
+          "Java Spring"
         ]
       },
       {
+        id: "cloud",
+        label: "ענן ומסדי נתונים",
+        items: ["AWS S3", "Docker", "CI/CD", "PostgreSQL", "MongoDB", "Redis"]
+      },
+      {
+        id: "testing",
+        label: "בדיקות",
+        items: ["Playwright", "Storybook", "Vitest", "Unit testing", "Integration testing", "E2E testing"]
+      },
+      {
         id: "craft",
-        label: "בינה מלאכותית, ארכיטקטורה וכלים",
+        label: "בינה מלאכותית, ארכיטקטורה ומוצר",
         items: [
-          "ADLC System",
           "Claude",
+          "MCP",
+          "Custom Claude skills, rules and plugins",
           "AI agents",
-          "Custom AI skills",
           "Agentic workflows",
+          "System prompts",
+          "AI code governance",
+          "Performance optimization",
           "Clean Architecture",
           "SOLID",
           "Design patterns",
-          "Modular architecture",
-          "Performance",
+          "Code review",
+          "Technical debt reduction",
           "Git",
           "GitHub",
-          "Atlassian Suite"
+          "Jira",
+          "Confluence",
+          "Figma",
+          "Design systems",
+          "UI Kit",
+          "Component-driven development",
+          "Accessibility",
+          "Product thinking"
         ]
       }
     ]
@@ -159,30 +182,37 @@ export const he: LocaleContent = {
         start: { year: 2025, month: 1 },
         end: null,
         tech: [
-          "Turborepo",
-          "Vite",
-          "React",
+          "React 19",
           "TypeScript",
+          "Vite",
           "TanStack Query",
           "Zustand",
-          "React Routing",
           "Tailwind CSS",
           ".NET",
           "C#",
-          "REST APIs",
-          "OpenAPI/Swagger",
-          "AWS"
+          "ASP.NET Core",
+          "Temporal",
+          "Kafka",
+          "Redis",
+          "Server-Sent Events (SSE)",
+          "OpenAPI / Swagger",
+          "AWS S3",
+          "Claude",
+          "MCP"
         ],
         bullets: [
-          "אחראית צד הלקוח של מוצר Transperra: הכיוון הטכנולוגי של הפרונטאנד, המימוש והאספקה לאורך כל מחזור חיי המוצר.",
-          "עבודה בצד הלקוח ובצד השרת ובניית פונקציונליות מקצה לקצה, ולא רק שכבת ה-UI.",
-          "מימוש תקשורת Twilio בשני הצדדים, כולל תהליכי OTP וההודעות שמאחורי מערכת האימות.",
-          "פיתוח מודול Announcements חדש בצד השרת — API, לוגיקה עסקית, שמירת נתונים ואחסון תמונות ב-AWS S3.",
-          "בניית פיצ'רים פול-סטאק שמחברים ממשקי React/TypeScript ל-API ב-.NET ולשירותים משותפים.",
-          "פלטפורמת בריאות מרובת לקוחות: בסיס קוד אחד שמשרת לקוחות שונים דרך הגדרות, תהליכים וקליטת נתונים לכל לקוח."
+          "אחריות על הארכיטקטורה והאספקה בצד הלקוח של פלטפורמת בריאות שבה בסיס קוד אחד משרת כמה לקוחות, דרך הגדרות, תהליכים וקליטת נתונים לכל לקוח.",
+          "פיתוח Rules, Skills ו-Plugins ל-Claude בהתאם לסטנדרטים של החברה לאיכות קוד, בדיקות, סקירת ביצועים, אנליטיקה ואבטחה מבוססת Compliance; הבאת כ-80% מבסיס הקוד לסטנדרטים של החברה, האצת אספקת פיצ'רים חדשים ושיפור שקיפות התהליכים וכיסוי הבדיקות.",
+          "הגדרת סטנדרטים לפיתוח צד לקוח בעזרת AI ברמת החברה, כולל הגדרות MCP, Skills, Plugins והגדרות Agents, כך שאימוץ ה-AI יציב ובטוח; סקירה ואימות של קוד שנכתב על ידי AI.",
+          "סקירת כ-80% מה-Pull Requests בצד הלקוח בחברה.",
+          "אספקת פיצ'רים מקצה לקצה שמחברים ממשקי React 19 / TypeScript ל-REST APIs ב-.NET 10 / ASP.NET Core, עם TypeScript clients שנוצרים מ-OpenAPI.",
+          "פיתוח פיצ'רים ב-Modular Monolith ב-.NET, עם Temporal workflows לתהליכים ארוכים, Kafka להזרמת אירועים ו-Redis ל-caching.",
+          "בניית עדכוני UI בזמן אמת עם Server-Sent Events (SSE) ו-polling.",
+          "מימוש אימות OTP מבוסס Twilio ותהליכי תקשורת עם משתמשים, בצד הלקוח ובצד השרת.",
+          "בניית מודול Announcements בצד השרת: REST APIs, לוגיקה עסקית, שמירת נתונים ואחסון מדיה ב-AWS S3."
         ],
         stack:
-          "React, TypeScript, Vite, TanStack Query, Zustand, Tailwind CSS, .NET 10, ASP.NET Core, REST APIs, OpenAPI, generated TypeScript API clients"
+          "React 19, TypeScript, Vite, TanStack Query, Zustand, Tailwind CSS, .NET 10, C#, ASP.NET Core, REST APIs, OpenAPI, Temporal, Kafka, Redis, SSE, AWS S3, Twilio, Claude, MCP"
       },
       {
         id: "maccabi",
@@ -197,21 +227,21 @@ export const he: LocaleContent = {
           "TypeScript",
           "Zustand",
           "TanStack Query",
+          "Recoil",
+          "WebSocket",
           "Tailwind CSS",
-          "Playwright",
-          "React Testing Library (Vitest)",
           "Storybook",
-          "Code review"
+          "Vitest",
+          "Playwright"
         ],
         bullets: [
-          "הובלת ריפקטורינג של כ-70% מהפרונטאנד בייצור, ושיפור איכות הקוד, תחזוקתיות וביצועים.",
-          "החלפת Recoil ב-Zustand וב-React Query, והפרדת מצב הלקוח מנתוני השרת.",
-          "מימוש מנגנון לוגים מערכתי שמספק תיעוד עקבי ואמין של האפליקציה.",
-          "הכנסת תקשורת זמן אמת ב-WebSocket, לאספקת נתונים מיידית ולעדכוני ממשק ריאקטיביים.",
-          "פיתוח פיצ'רים מורכבים ב-React 18, ב-TypeScript וב-React Hooks, עם בדיקות יחידה ובדיקות E2E ב-Vitest וב-Playwright.",
-          "קומפוננטות לשימוש חוזר ב-Storybook וב-Tailwind CSS; החלטות ארכיטקטורה, code review וחניכת מפתחים צעירים בקליטה."
+          "הובלת Refactoring של כ-70% מהפרונטאנד בפרודקשן, ושיפור איכות הקוד, התחזוקתיות והביצועים.",
+          "החלפת Recoil ב-Zustand וב-TanStack Query, והפרדת מצב הלקוח מנתוני השרת.",
+          "הכנסת תקשורת זמן אמת ב-WebSocket ומנגנון לוגים מערכתי.",
+          "הקמת בדיקות יחידה ובדיקות E2E ב-Vitest וב-Playwright; בניית UI Kit לשימוש חוזר ב-Storybook וב-Tailwind CSS.",
+          "חניכת מפתחים ג'וניורים, קבלת החלטות ארכיטקטורה, code review והובלת תכנון טכני."
         ],
-        stack: "React 18, TypeScript, Zustand, React Query, Vitest, Playwright, Storybook, Tailwind CSS"
+        stack: "React, TypeScript, Zustand, TanStack Query, WebSocket, Vitest, Playwright, Storybook, Tailwind CSS"
       },
       {
         id: "varonis",
@@ -221,14 +251,12 @@ export const he: LocaleContent = {
         place: "הרצליה",
         start: { year: 2022, month: 6 },
         end: { year: 2022, month: 12 },
-        tech: ["React", "TypeScript", "Zustand", "Storybook", "SCSS", "MUI", "GraphQL", "MySQL"],
+        tech: ["React", "TypeScript", "Zustand", "GraphQL", "SCSS", "MUI", "D3", "Python"],
         bullets: [
-          "בניית 5 דשבורדים ייעודיים שמציגים תועלת, סיכון, שימוש, עלות וביצועים של AWS, Azure, Salesforce ו-Slack.",
-          "ממשקי הצגת נתונים שמשלבים גרפים אינטראקטיביים, ווידג'טים ורכיבי דשבורד הניתנים להגדרה, מעל כמויות נתונים גדולות.",
-          "קומפוננטות ברורות לשימוש חוזר, שמאפשרות ללקוחות לעקוב אחרי השימוש בשירותים ולזהות הזדמנויות לייעול.",
-          "חיבור הפרונטאנד ל-GraphQL APIs ולשירותים מבוססי MySQL."
+          "בניית דשבורדים מותאמים לשימוש חוזר שמציגים שימוש, עלות, סיכון וביצועים של שירותי AWS, Azure, Salesforce ו-Slack.",
+          "בניית מערכת הגרפים ב-D3, על React, TypeScript, Zustand, GraphQL, SCSS ו-MUI, עם Python בצד הנתונים."
         ],
-        stack: "React, TypeScript, Zustand, Storybook, SCSS, MUI, GraphQL APIs, MySQL services"
+        stack: "React, TypeScript, Zustand, GraphQL, SCSS, MUI, D3, Python"
       },
       {
         id: "exposebox",
@@ -238,14 +266,12 @@ export const he: LocaleContent = {
         place: "פתח תקווה",
         start: { year: 2021, month: 9 },
         end: { year: 2022, month: 6 },
-        tech: ["React", "TypeScript", "MobX", "Context API", "REST APIs", "MUI"],
+        tech: ["React", "TypeScript", "MobX", "REST APIs", "MUI", "PostgreSQL", "Java"],
         bullets: [
-          "פיתוח פלטפורמת SaaS לאוטומציית שיווק מותאם אישית, שנועדה לחוויות לקוח ממוקדות.",
-          "פאנלים בדשבורד, חלונות קופצים, התראות ותהליכים אינטראקטיביים לניהול מסעות לקוח מותאמים.",
-          "קומפוננטות לשימוש חוזר וניהול מצב ב-React, ב-TypeScript, ב-MobX וב-Context API.",
-          "חיבור ל-REST APIs, ועבודה עם MUI וערכת נושא מותאמת לשמירה על חוויית מוצר אחידה."
+          "פיתוח דשבורדים, חלונות קופצים, התראות ותהליכים אינטראקטיביים לפלטפורמת SaaS לאוטומציית שיווק, ב-React, TypeScript, MobX, REST APIs, PostgreSQL ו-Java.",
+          "תכנון מערכות דשבורד לשימוש חוזר עם ערכת נושא מותאמת ב-MUI, לחוויית מוצר אחידה."
         ],
-        stack: "React, TypeScript, MobX, Context API, REST, MUI עם ערכת נושא מותאמת"
+        stack: "React, TypeScript, MobX, REST APIs, MUI עם ערכת נושא מותאמת, PostgreSQL, Java"
       },
       {
         id: "lomda",
@@ -255,31 +281,23 @@ export const he: LocaleContent = {
         place: "רחובות",
         start: { year: 2020, month: 10 },
         end: { year: 2021, month: 9 },
-        tech: ["React", "Node.js", "Redux"],
+        tech: ["React", "Redux", "MUI", "MySQL", "Node.js"],
         bullets: [
-          "פלטפורמת למידה מקוונת בינלאומית ללמידה מרחוק, עם שיעורים אינטראקטיביים, דיונים ווידאו.",
-          "סוגי שיעור מרובים, הערכה אוטומטית, תהליכי למידה מקוונים ובניית קורסים מותאמים.",
-          "ממשקים אינטראקטיביים שנבנו ללמידה מותאמת אישית ולהשתתפות פעילה של התלמידים.",
-          "עבודה בצד הלקוח ובצד השרת ב-React וב-Node.js, עם ניהול מצב ב-Redux."
+          "בניית פלטפורמת למידה מקוונת בינלאומית עם שיעורים אינטראקטיביים, הערכה אוטומטית, שיחות וידאו ובניית קורסים, ב-React, Redux, MUI, MySQL ו-Node.js."
         ],
-        stack: "React, Node.js, Redux"
+        stack: "React, Redux, MUI, MySQL, Node.js"
       },
       {
         id: "pillstate",
-        role: "מהנדסת תוכנה Angular",
+        role: "מהנדסת תוכנה",
         company: "Elpisor / Pillstate",
         companyUrl: "https://www.linkedin.com/company/elpisor/",
         place: "רחובות",
         start: { year: 2020, month: 6 },
         end: { year: 2020, month: 10 },
-        tech: ["Angular", "TypeScript", "RxJS", "Node.js", "Java", "MongoDB"],
-        bullets: [
-          "פתרון ווב ואנדרואיד לייעול חלוקת ציוד רפואי לאנשים עם מוגבלות.",
-          "פיתוח פונקציונליות ותהליכי משתמש בפלטפורמת הווב ב-Angular וב-TypeScript.",
-          "תהליכים ריאקטיביים וטיפול בנתונים ב-RxJS, בחיבור לשירותי Node.js בצד השרת.",
-          "עבודה גם בווב וגם במובייל, עם Java, אנדרואיד ו-MongoDB לצד סטאק הווב."
-        ],
-        stack: "Angular, TypeScript, RxJS, Node.js, Java, MongoDB"
+        tech: ["Angular", "TypeScript", "RxJS", "Node.js", "MongoDB"],
+        bullets: ["פיתוח תהליכי Web לפלטפורמת הפצת ציוד רפואי, ב-Angular, TypeScript, RxJS, Node.js ו-MongoDB."],
+        stack: "Angular, TypeScript, RxJS, Node.js, MongoDB"
       }
     ]
   },
@@ -448,6 +466,12 @@ export const he: LocaleContent = {
         label: "LinkedIn",
         value: "הלינקדאין שלי",
         href: "https://www.linkedin.com/in/alina-khomenker-0a2532137/"
+      },
+      {
+        kind: "behance",
+        label: "Behance",
+        value: "תיק העבודות שלי בעיצוב",
+        href: "https://www.behance.net/alinakhomenker"
       },
       { kind: "place", label: "מיקום", value: "חדרה, ישראל", href: "" }
     ]
