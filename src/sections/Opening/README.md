@@ -6,7 +6,7 @@ viewport over the moving light — no card, no frame, no photograph.
 ```
         Alina Khomenker
     Senior Full-Stack Engineer
-   6+ years, frontend oriented
+  7 years, frontend oriented
 
   [ Write to me ] [ Download CV ]
 ```
