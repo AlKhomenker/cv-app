@@ -3,7 +3,7 @@ import { useReducedMotion } from "@/common/hooks/useReducedMotion";
 import { motionMs } from "@/common/utils/motionTokens";
 import type { StageSection } from "../types";
 import { createProgress, type ProgressSource, type ProgressStore } from "../utils/progress";
-import { absorbedByPane } from "../utils/scrollers";
+import { absorbedByMarkedPane, absorbedByPane } from "../utils/scrollers";
 import { leaves, nextTravel, spanOf } from "../utils/travel";
 
 /** How much wheel travel counts as one step. A trackpad sends many small ones. */
@@ -316,6 +316,7 @@ export function useStage(sections: readonly StageSection[]): StageControl {
     };
 
     const onWheel = (event: WheelEvent) => {
+      if (absorbedByMarkedPane(event.target, event.deltaY)) return;
       if (reduced && absorbedByPane(event.target, event.deltaY)) return;
       event.preventDefault();
       advance(event.deltaY, WHEEL);
@@ -350,7 +351,12 @@ export function useStage(sections: readonly StageSection[]): StageControl {
       if (axis === "across") return;
 
       const delta = touch - y;
-      if (reduced && absorbedByPane(event.target, delta)) return;
+      // A pane that takes the swipe still moves the finger on, or the stage
+      // would jump by the whole distance the pane scrolled when it hands back.
+      if (absorbedByMarkedPane(event.target, delta) || (reduced && absorbedByPane(event.target, delta))) {
+        touch = y;
+        return;
+      }
       // Prevented whether or not the stage still has any use for this swipe.
       // A spent gesture must not fall through to the browser halfway, or the
       // page rubber-bands under a finger that was moving the stage a moment

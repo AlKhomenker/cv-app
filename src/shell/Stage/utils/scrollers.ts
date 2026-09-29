@@ -26,6 +26,19 @@ export function absorbedByPane(target: EventTarget | null, delta: number): boole
   return false;
 }
 
+/**
+ * Whether this gesture belongs to a pane that asked for it with `data-pane`.
+ *
+ * This one is asked with motion on too, because the pane is marked: finding it
+ * is one `closest()` and one `getComputedStyle`, not a walk up the tree. The
+ * timeline card is the case — a role whose words are longer than the card
+ * scrolls inside it, and hands the gesture back to the stage at either end.
+ */
+export function absorbedByMarkedPane(target: EventTarget | null, delta: number): boolean {
+  const pane = target instanceof Element ? target.closest("[data-pane]") : null;
+  return pane !== null && takesScroll(pane, delta);
+}
+
 function takesScroll(node: Element, delta: number): boolean {
   const overflow = getComputedStyle(node).overflowY;
   if (overflow !== "auto" && overflow !== "scroll") return false;

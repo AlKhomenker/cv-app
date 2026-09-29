@@ -51,7 +51,6 @@ export function TimelineStop({ role, state, focused, onOpen, onCard }: TimelineS
       <article
         className="relative flex h-(--card-h) w-full max-w-140 flex-col
           overflow-hidden rounded-[22px] border border-hair bg-glass
-          p-[clamp(16px,4vw,26px)] pb-12
           shadow-[inset_0_1px_0_var(--glass-edge),var(--glass-drop)]
           [backdrop-filter:blur(calc(var(--glass-blur)*var(--fade,1)))_saturate(var(--glass-sat))]
           scale-(--scale,1) [translate:0_var(--hover,0px)]
@@ -64,26 +63,34 @@ export function TimelineStop({ role, state, focused, onOpen, onCard }: TimelineS
         data-focused={focused}
         data-side={state.side}
         data-drawn={state.drawn}>
-        <RoleBody role={role} full={false} />
+        <div
+          className="h-full overflow-y-auto overscroll-contain
+            mask-[linear-gradient(to_bottom,black_calc(100%-40px),transparent)]"
+          data-pane>
+          <div className="relative min-h-full p-[clamp(16px,4vw,26px)] pb-14">
+            <RoleBody role={role} full={false} />
 
-        <button
-          ref={(node) => onCard(role.id, node)}
-          type="button"
-          className="absolute inset-0 flex cursor-pointer items-end justify-end rounded-[inherit]
-            border-0 bg-transparent p-[clamp(16px,4vw,26px)] text-end
-            data-[focused=true]:pointer-events-auto"
-          data-focused={focused}
-          tabIndex={focused ? 0 : -1}
-          aria-haspopup="dialog"
-          aria-label={`${content.experience.open}: ${role.role}`}
-          onClick={() => onOpen(role)}>
-          <span
-            className="inline-flex items-center rounded-full border border-hair bg-glass-strong
-              px-3 py-1 text-[0.78rem] font-semibold text-ink"
-            aria-hidden="true">
-            {content.experience.open}
-          </span>
-        </button>
+            <button
+              ref={(node) => onCard(role.id, node)}
+              type="button"
+              className="absolute inset-0 cursor-pointer rounded-[inherit] border-0 bg-transparent
+                data-[focused=true]:pointer-events-auto"
+              data-focused={focused}
+              tabIndex={focused ? 0 : -1}
+              aria-haspopup="dialog"
+              aria-label={`${content.experience.open}: ${role.role}`}
+              onClick={() => onOpen(role)}
+            />
+          </div>
+        </div>
+
+        <span
+          className="pointer-events-none absolute bottom-[clamp(16px,4vw,26px)] inset-e-[clamp(16px,4vw,26px)]
+            inline-flex items-center rounded-full border border-hair bg-glass-strong
+            px-3 py-1 text-[0.78rem] font-semibold text-ink"
+          aria-hidden="true">
+          {content.experience.open}
+        </span>
       </article>
     </li>
   );

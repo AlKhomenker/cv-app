@@ -214,6 +214,21 @@ the card still has every word, and the place, and the whole technology list.
 The height is fixed and identical for all six. It has to be, because the slot
 the track moves by is built out of it.
 
+So a card whose three lines do not fit — a long role title that wraps, a
+narrow screen — **scrolls inside itself** rather than growing or cutting the
+company name off. The words sit in a `data-pane` box, which the stage lets take
+the wheel and the swipe until it reaches its end and then steps on to the next
+role as usual; see `shell/Stage/README.md`. The site draws no scrollbars, so
+the only sign there is more is a 40px fade at the box's bottom edge. It sits
+over the empty padding under the text, which is why a card that fits looks the
+same as it did before.
+
+The open button lives inside that box, over the whole of its content, so a
+press anywhere on the card still opens the role and a wheel over it still
+reaches the scroller. The "Show more" pill is drawn outside the box, pinned to
+the corner, so it stays put while the text moves under it. Only the focused
+card takes pointer input at all, so only the one on the reading line scrolls.
+
 Cards further than two stops from the line are not PAINTED — no backdrop
 filter, no opacity worth compositing — but they are still in the list. "Not
 rendered" means nothing is drawn for them, not that the history has a hole in

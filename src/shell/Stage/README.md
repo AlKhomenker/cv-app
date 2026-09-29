@@ -100,6 +100,18 @@ It is consulted only under reduced motion, because that is the only layout
 that puts a real scroller on the stage. A `getComputedStyle` per ancestor per
 wheel event is not a cost to pay on a page that has no scroller in it.
 
+One pane is asked with motion on too: a box marked **`data-pane`**. Finding it
+is one `closest()` and one `getComputedStyle`, not a walk up the tree, so it is
+cheap enough for every wheel event. `absorbedByMarkedPane` is that check, and
+the timeline card in `sections/Experience` is the one user: a role whose words
+are longer than the card scrolls inside it, and gives the gesture back to the
+stage at either end. It applies to the wheel and to touch, not to the arrow
+keys — those move the timeline, one role per press, as before.
+
+While a pane takes a swipe, the stage still moves its record of the finger on
+(`touch = y`). Without that, the stage would jump by the whole distance the
+pane scrolled at the moment the pane hands the swipe back.
+
 `depth` goes with it: under reduced motion a section has no span at all,
 whatever it asked for. A depth paces an ANIMATION, and four screens of scroll
 spent on a picture that is not changing is four screens spent on nothing — so
